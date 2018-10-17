@@ -5,8 +5,8 @@ public class Point {
     double x, y;
 
     /**
-     * @param x - position in xx
-     * @param y - position in yy
+     * @param x - position in xx (kms)
+     * @param y - position in yy (kms)
      */
     public Point(double x, double y) {
         this.x = x;
@@ -15,7 +15,7 @@ public class Point {
 
     /**
      * 
-     * @return - position in xx
+     * @return - position in xx (kms)
      */
     
     public double getX() {
@@ -24,7 +24,7 @@ public class Point {
     
     /**
      * 
-     * @return - position in yy
+     * @return - position in yy (kms)
      */
 
     public double getY() {
@@ -32,7 +32,8 @@ public class Point {
     }
 
     /**
-     * 
+     * Returns the distance between 2 points (kms)
+     *
      * @param other - other point coordinates
      * @return - distance between the two points
      */
