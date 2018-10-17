@@ -2,6 +2,7 @@ package agents;
 
 import elements.Point;
 import jade.core.Agent;
+import jade.core.behaviours.CyclicBehaviour;
 
 
 public class PostMan extends Agent {
@@ -16,6 +17,14 @@ public class PostMan extends Agent {
 
     public void setup() {
         System.out.println("[" + name + "] a minha posição é x: " + position.getX() + "  y: " + position.getY() );
+    }
+
+    class ListeningBehaviour extends CyclicBehaviour {
+
+        @Override
+        public void action() {
+
+        }
     }
 
 }

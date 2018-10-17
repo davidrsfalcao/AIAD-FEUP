@@ -60,7 +60,7 @@ public class MailCompany {
     public void initAgents() throws StaleProxyException {
 
         agentsContainer.acceptNewAgent("PostMan", new PostMan("David", new Point(1,1))).start();
-        agentsContainer.acceptNewAgent("PostOffice", new PostOffice(new Point(0,0))).start();
+        agentsContainer.acceptNewAgent("PostOffice", new PostOffice()).start();
     }
 
 

@@ -1,18 +1,15 @@
 package agents;
 
-import elements.Point;
 import jade.core.Agent;
+import utils.Headers;
 
 public class PostOffice extends Agent {
 
-    Point position;
-
-    public PostOffice(Point position){
-        this.position = position;
+    public PostOffice(){
     }
 
     public void setup() {
-        System.out.println("[POSTOFFICE] a minha posição é x: " + position.getX() + "  y: " + position.getY() );
+        System.out.println("[POSTOFFICE] a minha posição é x: " + Headers.postOfficePosition.getX() + "  y: " + Headers.postOfficePosition.getY() );
     }
 
 

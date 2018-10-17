@@ -17,4 +17,8 @@ public class Vehicle {
 
         return distance * averageConsumption * electricityPrice;
     }
+
+
+
+
 }
