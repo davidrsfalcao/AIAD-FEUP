@@ -3,6 +3,8 @@ package agents;
 import elements.Point;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 
 
 public class PostMan extends Agent {
@@ -16,14 +18,26 @@ public class PostMan extends Agent {
     }
 
     public void setup() {
-        System.out.println("[" + name + "] a minha posição é x: " + position.getX() + "  y: " + position.getY() );
+        //System.out.println("[" + name + "] a minha posição é x: " + position.getX() + "  y: " + position.getY() );
+        addBehaviour(new PostManBehaviour());
     }
 
-    class ListeningBehaviour extends CyclicBehaviour {
+    class PostManBehaviour extends CyclicBehaviour {
+
+        MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.QUERY_IF);
 
         @Override
         public void action() {
-
+            ACLMessage msg = receive(mt);
+            if(msg != null) {
+                System.out.println(msg);
+                ACLMessage reply = msg.createReply();
+                reply.setPerformative(ACLMessage.INFORM);
+                reply.setContent("Don't have a clue...");
+                send(reply);
+            } else {
+                block();
+            }
         }
     }
 
