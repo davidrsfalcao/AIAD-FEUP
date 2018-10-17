@@ -7,9 +7,12 @@ public class PostOffice extends Agent {
 
     Point position;
 
-    public void setup(Point position) {
+    public PostOffice(Point position){
         this.position = position;
-        System.out.println("[ POSTOFICE] a minha posição é x: " + position.getX() + "  y: " + position.getY() );
+    }
+
+    public void setup() {
+        System.out.println("[POSTOFFICE] a minha posição é x: " + position.getX() + "  y: " + position.getY() );
     }
 
 

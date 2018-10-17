@@ -15,7 +15,7 @@ public class PostMan extends Agent {
     }
 
     public void setup() {
-        System.out.println("[ " + name + "] a minha posição é x: " + position.getX() + "  y: " + position.getY() );
+        System.out.println("[" + name + "] a minha posição é x: " + position.getX() + "  y: " + position.getY() );
     }
 
 }

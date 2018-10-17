@@ -1,6 +1,7 @@
 package launcher;
 
 import agents.PostMan;
+import agents.PostOffice;
 import elements.Point;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
@@ -59,6 +60,8 @@ public class MailCompany {
     public void initAgents() throws StaleProxyException {
 
         agentsContainer.acceptNewAgent("PostMan", new PostMan("David", new Point(1,1))).start();
+        agentsContainer.acceptNewAgent("PostOffice", new PostOffice(new Point(0,0))).start();
+
     }
 
 
