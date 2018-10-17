@@ -230,5 +230,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+!libs/jade/lib/jade.jar
 
 # End of https://www.gitignore.io/api/java,windows,eclipse,intellij+all
