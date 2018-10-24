@@ -14,12 +14,9 @@ public class HelloMessage extends Message {
     }
 
     public HelloMessage(ACLMessage msg){
-
         String[] args = msg.getContent().split(SEPARATOR);
-
-        if(args.length != 2){
+        if(args.length != 2)
             return;
-        }
         else {
             this.type = HELLO;
             this.name = args[1];

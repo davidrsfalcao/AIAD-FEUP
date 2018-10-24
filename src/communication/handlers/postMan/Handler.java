@@ -3,7 +3,6 @@ package communication.handlers.postMan;
 import agents.PostMan;
 import communication.messages.Message;
 import jade.lang.acl.ACLMessage;
-
 import static communication.Header.HELLOR;
 
 public class Handler {
@@ -16,11 +15,12 @@ public class Handler {
                 switch (content.getType()){
                     case HELLOR:
                         return HelloHandler.parse(message, postMan);
+
+                    default:
+                         return null;
                 }
             }
         }
-
         return null;
-
     }
 }

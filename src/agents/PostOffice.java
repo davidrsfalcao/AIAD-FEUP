@@ -22,16 +22,12 @@ public class PostOffice extends Agent {
         instance = this;
     }
 
-    //Quando o PostOffice receber a mensagem de um PostMan a dizer que está disponivel,vai ser chamado o PostManID.
-
     public void setup() {
-        //System.out.println("[POSTOFFICE] a minha posição é x: " + Headers.postOfficePosition.getX() + "  y: " + Headers.postOfficePosition.getY() );
         addBehaviour(new PostOfficeBehaviour());
     }
 
     public void addPostman(PostManID postManID){
         postMen.add(postManID);
-
         System.out.println(" --- NEW POSTMAN ---");
     }
 
@@ -55,7 +51,5 @@ public class PostOffice extends Agent {
             }
         }
     }
-
-
 
 }

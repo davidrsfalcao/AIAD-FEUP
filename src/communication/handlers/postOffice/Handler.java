@@ -14,16 +14,14 @@ public class Handler {
             Message content = Message.parse(message);
             if(content != null){
                 switch (content.getType()){
-
                     case HELLO:
                         return HelloHandler.parse(message, postOffice);
+
+                    default:
+                        return null;
                 }
-
-
             }
         }
-
         return null;
-
     }
 }

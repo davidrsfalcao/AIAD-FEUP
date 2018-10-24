@@ -2,7 +2,6 @@ package agents;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import communication.handlers.postMan.Handler;
 import communication.messages.HelloMessage;
 import elements.Order;
@@ -13,10 +12,7 @@ import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 
-
-
 public class PostMan extends Agent {
-
     private String name;
     private Point position;
     private Point postOfficePosition;
@@ -25,7 +21,6 @@ public class PostMan extends Agent {
     private Vehicle vehicle;
     private PostMan instance;
 
-    
     public PostMan(String name, Point position, AID postOffice,int capacity){
         this.name = name;
         this.position = position;
@@ -34,33 +29,11 @@ public class PostMan extends Agent {
         int comsuption = rnd.nextInt(51)+100;
         vehicle = new Vehicle(capacity,comsuption);
         instance = this;
-        
-        //teste
-//        Point p1= new Point(10,10);
-//        Point p2 = new Point(2,2);
-//        Point p3 = new Point(10,11);
-//        Order o1 = new Order(p1,10);
-//        Order o2 = new Order(p2,20);
-//        Order o3 = new Order(p3,30);
-//        this.orders.add(o1);
-//        this.orders.add(o2);
-//        this.orders.add(o3);
-//        System.out.println("Before Sort: "+ this.orders);
-//        sortOrders(0,this.orders.size());
-//        System.out.println("After Sort: "+ this.orders);
-        
+
     }
-
-
 
     public void setup() {
         addBehaviour(new PostManBehaviour());
-    }
-
-    public void updatePostOfficePosition(Point position){
-        this.postOfficePosition = position;
-
-        System.out.println(" --- " + name + " updated PostOffice Position to " + postOfficePosition + " ---");
     }
 
     public ArrayList<Order> getOrders() {
@@ -69,6 +42,12 @@ public class PostMan extends Agent {
 
     public Point getPosition() {
         return position;
+    }
+
+    public void updatePostOfficePosition(Point position){
+        this.postOfficePosition = position;
+
+        System.out.println(" --- " + name + " updated PostOffice Position to " + postOfficePosition + " ---");
     }
 
     class PostManBehaviour extends CyclicBehaviour {

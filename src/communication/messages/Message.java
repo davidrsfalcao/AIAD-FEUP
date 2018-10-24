@@ -21,7 +21,6 @@ public abstract class Message implements Header {
 
     }
 
-
     private static Message parseInformMessage(ACLMessage message){
         String[] args = message.getContent().split(Header.SEPARATOR);
         String tp;

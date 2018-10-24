@@ -13,18 +13,19 @@ public class HelloResponse extends Message {
     }
 
     public HelloResponse(ACLMessage msg){
-
         String[] args = msg.getContent().split(SEPARATOR);
-
-        if(args.length != 3){
+        if(args.length != 3)
             return;
-        }
         else {
             double x =  Double.parseDouble(args[1]);
             double y =  Double.parseDouble(args[2]);
             this.position = new Point(x,y);
             this.type = HELLOR;
         }
+    }
+
+    public Point getPosition() {
+        return position;
     }
 
     @Override
@@ -35,7 +36,4 @@ public class HelloResponse extends Message {
         return reply;
     }
 
-    public Point getPosition() {
-        return position;
-    }
 }

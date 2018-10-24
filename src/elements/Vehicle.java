@@ -3,7 +3,6 @@ package elements;
 import static utils.Headers.electricityPrice;
 
 public class Vehicle {
-
     private int maximumLoad, currentLoad;
     private int averageConsumption; /* Wh/km (eletric cars) */
 
@@ -14,18 +13,15 @@ public class Vehicle {
     }
 
     public double getTravelPrice(double distance){
-
         return distance * averageConsumption * electricityPrice;
     }
     
     public int getMaxiumLoad() {
-    	return this.maximumLoad;
+    	return maximumLoad;
     }
+
     public int getCurrentLoad() {
-    	return this.currentLoad;
+    	return currentLoad;
     }
-
-
-
 
 }
