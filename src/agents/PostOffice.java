@@ -7,7 +7,7 @@ import utils.Headers;
 
 public class PostOffice extends Agent {
 
-    public PostOffice(){
+    public PostOffice( ){
     }
 
     public void setup() {
@@ -19,12 +19,13 @@ public class PostOffice extends Agent {
         @Override
         public void action() {
             ACLMessage msg = receive();
-            System.out.println("FUCKING HERE");
+
+
             if(msg != null) {
-                System.out.println(msg);
+                System.out.println("[POSTOFFICE] " + msg.getContent());
                 ACLMessage reply = msg.createReply();
                 reply.setPerformative(ACLMessage.INFORM);
-                reply.setContent("Got your message!");
+                reply.setContent("Got your message! " + msg.getSender());
                 send(reply);
             } else {
                 block();
