@@ -8,7 +8,7 @@ import static communication.Header.HELLO;
 
 public class Handler {
 
-    public static ACLMessage parse(ACLMessage message){
+    public static ACLMessage parse(ACLMessage message, PostOffice postOffice){
 
         if(message != null){
             Message content = Message.parse(message);
@@ -16,7 +16,7 @@ public class Handler {
                 switch (content.getType()){
 
                     case HELLO:
-                        return HelloHandler.parse(message);
+                        return HelloHandler.parse(message, postOffice);
                 }
 
 

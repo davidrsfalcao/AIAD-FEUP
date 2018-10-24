@@ -8,7 +8,7 @@ import jade.lang.acl.ACLMessage;
 
 public class HelloHandler extends Handler {
 
-    public static ACLMessage parse(ACLMessage message) {
+    public static ACLMessage parse(ACLMessage message, PostOffice postOffice) {
         return new  HelloResponse(message, new Point(0,0)).toACL();
     }
 

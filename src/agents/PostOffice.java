@@ -7,8 +7,11 @@ import jade.lang.acl.ACLMessage;
 import utils.Headers;
 
 public class PostOffice extends Agent {
-    
+
+    private PostOffice instance;
+
     public PostOffice( ){
+        instance = this;
     }
 
     public void setup() {
@@ -23,9 +26,9 @@ public class PostOffice extends Agent {
 
             if(msg != null) {
                 System.out.println("[POSTOFFICE] " + msg.getContent());
-                ACLMessage reply = Handler.parse(msg);
+                ACLMessage reply = Handler.parse(msg, instance);
                 if(reply != null){
-                    send(Handler.parse(msg));
+                    send(reply);
                 }
             } else {
                 block();
