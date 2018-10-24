@@ -7,12 +7,22 @@ public abstract class Message implements Header {
 
     protected String type = "NONE";
 
-    public String getType() {
-        return type;
-    }
-
     public static Message parse(ACLMessage message){
 
+        switch (message.getPerformative()){
+
+            case ACLMessage.INFORM:
+                return parseInformMessage(message);
+
+            default:
+                return null;
+
+        }
+
+    }
+
+
+    private static Message parseInformMessage(ACLMessage message){
         String[] args = message.getContent().split(Header.SEPARATOR);
         String tp;
 
@@ -22,12 +32,17 @@ public abstract class Message implements Header {
             case HELLO:
                 return new HelloMessage(message);
 
+            default:
+                return null;
+
         }
 
-        return null;
 
     }
 
-    
+    public String getType() {
+        return type;
+    }
+
     public abstract ACLMessage toACL();
 }
