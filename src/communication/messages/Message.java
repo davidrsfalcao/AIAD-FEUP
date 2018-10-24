@@ -7,7 +7,6 @@ public abstract class Message implements Header {
 
     protected String type = "NONE";
 
-
     public String getType() {
         return type;
     }
@@ -29,5 +28,6 @@ public abstract class Message implements Header {
 
     }
 
+    
     public abstract ACLMessage toACL();
 }
