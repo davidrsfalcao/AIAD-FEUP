@@ -3,9 +3,6 @@ package communication.messages;
 import elements.Point;
 import jade.lang.acl.ACLMessage;
 
-import javax.swing.text.Position;
-
-
 public class HelloResponse extends Message {
 
     private ACLMessage msg;
@@ -31,7 +28,6 @@ public class HelloResponse extends Message {
         }
     }
 
-
     @Override
     public ACLMessage toACL() {
         ACLMessage reply = msg.createReply();
@@ -43,4 +39,5 @@ public class HelloResponse extends Message {
     public Point getPosition() {
         return position;
     }
+
 }

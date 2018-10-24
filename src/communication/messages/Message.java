@@ -34,7 +34,7 @@ public abstract class Message implements Header {
 
             case HELLOR:
                 return new HelloResponse(message);
-
+            
             default:
                 return null;
 
