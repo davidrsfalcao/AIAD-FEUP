@@ -1,7 +1,9 @@
 package communication.handlers.postOffice;
 
 import agents.PostOffice;
+import communication.messages.HelloMessage;
 import communication.messages.HelloResponse;
+import elements.PostManID;
 import elements.Point;
 import jade.lang.acl.ACLMessage;
 
@@ -9,8 +11,9 @@ import jade.lang.acl.ACLMessage;
 public class HelloHandler extends Handler {
 
     public static ACLMessage parse(ACLMessage message, PostOffice postOffice) {
-        return new  HelloResponse(message, new Point(0,0)).toACL();
+        String name = new HelloMessage(message).getName();
+        postOffice.addPostman(new PostManID(name, message.getSender()));
+
+        return new  HelloResponse(message, postOffice.getPosition()).toACL();
     }
-
-
 }

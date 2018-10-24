@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import communication.handlers.postMan.Handler;
 import communication.messages.HelloMessage;
 import elements.Order;
 import elements.Point;
@@ -19,9 +20,11 @@ public class PostMan extends Agent {
 
     private String name;
     private Point position;
+    private Point postOfficePosition;
     private AID postOffice;
     private ArrayList<Order> orders = new ArrayList();
     private Vehicle vehicle;
+    private PostMan instance;
 
     
     public PostMan(String name, Point position, AID postOffice,int capacity){
@@ -31,39 +34,40 @@ public class PostMan extends Agent {
         Random rnd = new Random();
         int comsuption = rnd.nextInt(51)+100;
         vehicle = new Vehicle(capacity,comsuption);
+        instance = this;
     }
     
     public void setup() {
-        //System.out.println("[" + name + "] a minha posição é x: " + position.getX() + "  y: " + position.getY() );
         addBehaviour(new PostManBehaviour());
+    }
+
+    public void updatePostOfficePosition(Point position){
+        this.postOfficePosition = position;
+
+        System.out.println(" --- " + name + " updated PostOffice Position to " + postOfficePosition + " ---");
     }
 
     class PostManBehaviour extends CyclicBehaviour {
 
         @Override
         public void action() {
+            System.out.println("[POSTMAN " + name + "] 7 - HELLO " + name);
             send(new HelloMessage(name, postOffice).toACL());
 
             while(true){
-                ACLMessage receive = receive();
-                if(receive != null) {
-                    System.out.println("[POSTMAN] " + receive.getContent());
-                    ACLMessage reply = receive.createReply();
-                    reply.setPerformative(ACLMessage.INFORM);
-                    reply.setContent("Ola!");
+                ACLMessage msg = receive();
+                if(msg != null) {
+                    ACLMessage reply = Handler.parse(msg, instance);
 
-                    send(reply);
+                    if(reply != null){
+                        send(reply);
+                        System.out.println("[POSTMAN " + name + " ] " + reply.getPerformative() + " - " + reply.getContent());
+                    }
+                  
                 } else {
                     block();
                 }
             }
-
-            /*
-            ACLMessage reply = msg.createReply();
-            reply.setPerformative(ACLMessage.INFORM);
-            reply.setContent("Don't have a clue...");
-            send(reply);
-            */
         }
     }
 
