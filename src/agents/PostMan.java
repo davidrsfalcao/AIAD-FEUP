@@ -1,7 +1,13 @@
 package agents;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+
 import communication.messages.HelloMessage;
+import elements.Order;
 import elements.Point;
+import elements.Vehicle;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
@@ -14,13 +20,19 @@ public class PostMan extends Agent {
     private String name;
     private Point position;
     private AID postOffice;
+    private ArrayList<Order> orders = new ArrayList();
+    private Vehicle vehicle;
 
-    public PostMan(String name, Point position, AID postOffice){
+    
+    public PostMan(String name, Point position, AID postOffice,int capacity){
         this.name = name;
         this.position = position;
         this.postOffice = postOffice;
+        Random rnd = new Random();
+        int comsuption = rnd.nextInt(51)+100;
+        vehicle = new Vehicle(capacity,comsuption);
     }
-
+    
     public void setup() {
         //System.out.println("[" + name + "] a minha posição é x: " + position.getX() + "  y: " + position.getY() );
         addBehaviour(new PostManBehaviour());

@@ -63,7 +63,7 @@ public class MailCompany {
 
         agentsContainer.acceptNewAgent("PostOffice", postOffice).start();
 
-        PostMan postMan = new PostMan("David", new Point(1,1), postOffice.getAID());
+        PostMan postMan = new PostMan("David", new Point(1,1), postOffice.getAID(),10);
         agentsContainer.acceptNewAgent("PostMan", postMan).start();
 
     }

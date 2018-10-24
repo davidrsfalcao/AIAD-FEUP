@@ -17,6 +17,13 @@ public class Vehicle {
 
         return distance * averageConsumption * electricityPrice;
     }
+    
+    public int getMaxiumLoad() {
+    	return this.maximumLoad;
+    }
+    public int getCurrentLoad() {
+    	return this.currentLoad;
+    }
 
 
 
