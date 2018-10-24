@@ -42,5 +42,8 @@ public class Point {
         return Math.sqrt(Math.pow(other.getX()-this.x, 2) + Math.pow(other.getY()-this.y, 2));
     }
 
-
+    @Override
+    public String toString() {
+        return "x:" + x + "  y:" + y;
+    }
 }

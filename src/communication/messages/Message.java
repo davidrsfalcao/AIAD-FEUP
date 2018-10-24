@@ -32,6 +32,9 @@ public abstract class Message implements Header {
             case HELLO:
                 return new HelloMessage(message);
 
+            case HELLOR:
+                return new HelloResponse(message);
+
             default:
                 return null;
 

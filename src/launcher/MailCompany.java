@@ -59,12 +59,18 @@ public class MailCompany {
 
     public void initAgents() throws StaleProxyException {
 
-        PostOffice postOffice = new PostOffice();
+        PostOffice postOffice = new PostOffice(new Point(0,0));
 
         agentsContainer.acceptNewAgent("PostOffice", postOffice).start();
 
         PostMan postMan = new PostMan("David", new Point(1,1), postOffice.getAID(),10);
-        agentsContainer.acceptNewAgent("PostMan", postMan).start();
+        agentsContainer.acceptNewAgent("PostMan David" , postMan).start();
+
+        PostMan postMan1 = new PostMan("Pedro", new Point(2,2), postOffice.getAID(),9);
+        agentsContainer.acceptNewAgent("PostMan Pedro", postMan1).start();
+
+        PostMan postMan2 = new PostMan("Veronica", new Point(10,-10), postOffice.getAID(),4);
+        agentsContainer.acceptNewAgent("PostMan Veronica", postMan2).start();
 
     }
 

@@ -3,6 +3,8 @@ package communication.messages;
 import elements.Point;
 import jade.lang.acl.ACLMessage;
 
+import javax.swing.text.Position;
+
 
 public class HelloResponse extends Message {
 
@@ -18,11 +20,14 @@ public class HelloResponse extends Message {
 
         String[] args = msg.getContent().split(SEPARATOR);
 
-        if(args.length != 1){
+        if(args.length != 3){
             return;
         }
         else {
-            this.type = HELLO;
+            double x =  Double.parseDouble(args[1]);
+            double y =  Double.parseDouble(args[2]);
+            this.position = new Point(x,y);
+            this.type = HELLOR;
         }
     }
 
@@ -31,8 +36,11 @@ public class HelloResponse extends Message {
     public ACLMessage toACL() {
         ACLMessage reply = msg.createReply();
         reply.setPerformative(ACLMessage.INFORM);
-        reply.setContent("HELLO BACK");
+        reply.setContent("HELLOR" + SEPARATOR + position.getX() + SEPARATOR + position.getY());
         return reply;
     }
 
+    public Point getPosition() {
+        return position;
+    }
 }
