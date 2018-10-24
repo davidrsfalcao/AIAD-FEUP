@@ -73,7 +73,5 @@ public class MailCompany {
         agentsContainer.acceptNewAgent("PostMan Veronica", postMan2).start();
 
     }
-
-
-
+    
 }
