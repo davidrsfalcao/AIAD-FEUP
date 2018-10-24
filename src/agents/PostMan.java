@@ -50,38 +50,9 @@ public class PostMan extends Agent {
 //        System.out.println("After Sort: "+ this.orders);
         
     }
-    
-    public void sortOrders(int start,int end) {
-    	//No inicio passar start como 0 e end como this.orders.size();
-    	Order aux;
-    	int i=start,j = end-1;
-    	Point pivot =  this.orders.get(((start+end)/2)).getDestiny();
-    	while(i <= j) {
-    		while( (this.orders.get(i).getDestiny().getDistance(position)) < pivot.getDistance(position) && i < end ) {
-    			i++;
-    		}
-    		while( (this.orders.get(j).getDestiny().getDistance(position)) > pivot.getDistance(position) && j > start) {
-    			j--;
-    		}
-    		if(i <= j) {
-    			aux = this.orders.get(i);
-    			this.orders.set(i, this.orders.get(j));
-    			this.orders.set(j,aux);
-    			i++;
-    			j--;
-    		}
-    		
-    	}
-    	
-    	if(j > start) {
-    		sortOrders(start,j+1);
-    	}
-    	if(i < end) {
-    		sortOrders(i,end);
-    	}
-    	
-    }
-    
+
+
+
     public void setup() {
         addBehaviour(new PostManBehaviour());
     }
@@ -90,6 +61,14 @@ public class PostMan extends Agent {
         this.postOfficePosition = position;
 
         System.out.println(" --- " + name + " updated PostOffice Position to " + postOfficePosition + " ---");
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    public Point getPosition() {
+        return position;
     }
 
     class PostManBehaviour extends CyclicBehaviour {
