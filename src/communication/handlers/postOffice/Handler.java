@@ -4,7 +4,7 @@ import agents.PostOffice;
 import communication.messages.Message;
 import jade.lang.acl.ACLMessage;
 
-import static communication.Header.HELLO;
+import static communication.Header.HANDSHAKE;
 
 public class Handler {
 
@@ -14,7 +14,7 @@ public class Handler {
             Message content = Message.parse(message);
             if(content != null){
                 switch (content.getType()){
-                    case HELLO:
+                    case HANDSHAKE:
                         return HelloHandler.parse(message, postOffice);
 
                     default:

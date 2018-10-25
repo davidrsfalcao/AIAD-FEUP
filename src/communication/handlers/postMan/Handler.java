@@ -3,7 +3,7 @@ package communication.handlers.postMan;
 import agents.PostMan;
 import communication.messages.Message;
 import jade.lang.acl.ACLMessage;
-import static communication.Header.HELLOR;
+import static communication.Header.HANDSHAKE;
 
 public class Handler {
 
@@ -13,7 +13,7 @@ public class Handler {
             Message content = Message.parse(message);
             if(content != null){
                 switch (content.getType()){
-                    case HELLOR:
+                    case HANDSHAKE:
                         return HelloHandler.parse(message, postMan);
 
                     default:

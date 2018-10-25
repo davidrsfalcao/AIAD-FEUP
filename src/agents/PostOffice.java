@@ -2,6 +2,9 @@ package agents;
 
 import communication.handlers.postOffice.Handler;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import communication.messages.NewOrderMessage;
 import elements.Order;
 import elements.Point;
 import elements.PostManID;
@@ -24,6 +27,7 @@ public class PostOffice extends Agent {
 
     public void setup() {
         addBehaviour(new PostOfficeBehaviour());
+        addBehaviour(new OrderGeneratorBehaviour());
     }
 
     public void addPostman(PostManID postManID){
@@ -35,7 +39,7 @@ public class PostOffice extends Agent {
         return position;
     }
 
-    public class PostOfficeBehaviour extends CyclicBehaviour {
+    class PostOfficeBehaviour extends CyclicBehaviour {
         @Override
         public void action() {
             ACLMessage msg = receive();
@@ -51,5 +55,22 @@ public class PostOffice extends Agent {
             }
         }
     }
+
+    class OrderGeneratorBehaviour extends CyclicBehaviour{
+
+        @Override
+        public void action() {
+
+            /*
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                //e.printStackTrace();
+            }
+            */
+            //send(new NewOrderMessage(new Point(8.8, -5.3),48,postMen).toACL());
+        }
+    }
+
 
 }

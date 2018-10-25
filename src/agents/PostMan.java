@@ -3,7 +3,7 @@ package agents;
 import java.util.ArrayList;
 import java.util.Random;
 import communication.handlers.postMan.Handler;
-import communication.messages.HelloMessage;
+import communication.messages.HandshakeMessage;
 import elements.Order;
 import elements.Point;
 import elements.Vehicle;
@@ -11,6 +11,8 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
+
+import static communication.Header.HANDSHAKE;
 
 public class PostMan extends Agent {
     private String name;
@@ -54,8 +56,8 @@ public class PostMan extends Agent {
 
         @Override
         public void action() {
-            System.out.println("[POSTMAN " + name + "] 7 - HELLO " + name);
-            send(new HelloMessage(name, postOffice).toACL());
+            System.out.println("[POSTMAN " + name + "] " + ACLMessage.SUBSCRIBE + " - " +  HANDSHAKE + " " + name);
+            send(new HandshakeMessage(name, postOffice).toACL());
 
             while(true){
                 ACLMessage msg = receive();

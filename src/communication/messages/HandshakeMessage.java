@@ -3,22 +3,22 @@ package communication.messages;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 
-public class HelloMessage extends Message {
+public class HandshakeMessage extends Message {
 
     private String name;
     private AID receiver;
 
-    public HelloMessage(String name, AID receiver) {
+    public HandshakeMessage(String name, AID receiver) {
         this.name = name;
         this.receiver = receiver;
     }
 
-    public HelloMessage(ACLMessage msg){
+    public HandshakeMessage(ACLMessage msg){
         String[] args = msg.getContent().split(SEPARATOR);
         if(args.length != 2)
             return;
         else {
-            this.type = HELLO;
+            this.type = HANDSHAKE;
             this.name = args[1];
         }
     }
@@ -29,8 +29,8 @@ public class HelloMessage extends Message {
 
     @Override
     public ACLMessage toACL() {
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent(HELLO + SEPARATOR + name);
+        ACLMessage msg = new ACLMessage(ACLMessage.SUBSCRIBE);
+        msg.setContent(HANDSHAKE + SEPARATOR + name);
         msg.addReceiver(receiver);
         return msg;
     }

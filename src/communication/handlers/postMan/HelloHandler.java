@@ -1,14 +1,14 @@
 package communication.handlers.postMan;
 
 import agents.PostMan;
-import communication.messages.HelloResponse;
+import communication.messages.HandshakeResponse;
 import jade.lang.acl.ACLMessage;
 
 public class HelloHandler extends Handler {
 
     public static ACLMessage parse(ACLMessage message, PostMan postMan) {
 
-        HelloResponse msg = new HelloResponse(message);
+        HandshakeResponse msg = new HandshakeResponse(message);
         postMan.updatePostOfficePosition(msg.getPosition());
 
         return null;
