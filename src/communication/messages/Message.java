@@ -51,7 +51,6 @@ public abstract class Message implements Header {
         String tp;
 
         tp = args[0];
-
         switch (tp){
             case HANDSHAKE:
                 return new HandshakeResponse(message);

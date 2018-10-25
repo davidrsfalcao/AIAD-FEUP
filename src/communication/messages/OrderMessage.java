@@ -7,19 +7,19 @@ import jade.lang.acl.ACLMessage;
 
 import java.util.ArrayList;
 
-public class NewOrderMessage extends Message {
+public class OrderMessage extends Message {
 
     private Point position;
     private int estimatedTime;
     private ArrayList<PostManID> receivers;
 
-    public NewOrderMessage(Point position, int estimatedTime, ArrayList<PostManID> receivers) {
+    public OrderMessage(Point position, int estimatedTime, ArrayList<PostManID> receivers) {
         this.position = position;
         this.estimatedTime = estimatedTime;
         this.receivers = receivers;
     }
 
-    public NewOrderMessage(ACLMessage msg){
+    public OrderMessage(ACLMessage msg){
         String[] args = msg.getContent().split(SEPARATOR);
         if(args.length != 4)
             return;

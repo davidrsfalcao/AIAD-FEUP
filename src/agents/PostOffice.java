@@ -2,9 +2,7 @@ package agents;
 
 import communication.handlers.postOffice.Handler;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
-import communication.messages.NewOrderMessage;
 import elements.Order;
 import elements.Point;
 import elements.PostManID;
@@ -68,7 +66,7 @@ public class PostOffice extends Agent {
                 //e.printStackTrace();
             }
             */
-            //send(new NewOrderMessage(new Point(8.8, -5.3),48,postMen).toACL());
+            //send(new OrderMessage(new Point(8.8, -5.3),48,postMen).toACL());
         }
     }
 
