@@ -25,3 +25,17 @@ Calcula a sua oferta |  < | [Inform] *Order* |
 [Propose] Proposal | > | Guarda o proposta |
 Aguarda resposta |   | Calcula a melhor proposta |
 Analisa resposta | < | [ACCEPT\_PROPOSAL] *Proposal* <br> ou <br> [REJECT\_PROPOSAL] *Proposal*
+
+### Mensagens
+
+Enviar mensagem(exemplo):
+
+```java
+	send(new HandshakeMessage(name, postOffice).toACL());
+```
+
+Handler mensagem:
+
+```java
+	ACLMessage reply = Handler.parse(msg, instance);
+```
