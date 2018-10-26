@@ -2,7 +2,6 @@ package communication.messages;
 
 import elements.Point;
 import elements.PostManID;
-import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class OrderMessage extends Message {
         if(args.length != 4)
             return;
         else {
-            type = NEWORDER;
+            type = ORDER;
             double x = Double.parseDouble(args[1]);
             double y = Double.parseDouble(args[2]);
             position = new Point(x,y);
@@ -43,7 +42,7 @@ public class OrderMessage extends Message {
     @Override
     public ACLMessage toACL() {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent(NEWORDER + SEPARATOR + position.getX() + SEPARATOR + position.getY() + SEPARATOR + estimatedTime);
+        msg.setContent(ORDER + SEPARATOR + position.getX() + SEPARATOR + position.getY() + SEPARATOR + estimatedTime);
         for(PostManID receiver : receivers){
             msg.addReceiver(receiver.getId());
         }

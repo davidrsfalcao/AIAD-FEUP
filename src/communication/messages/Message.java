@@ -13,14 +13,14 @@ public abstract class Message implements Header {
             case ACLMessage.SUBSCRIBE:
                 return parseSubscribeMessage(message);
 
-                /*
+
             case ACLMessage.INFORM:
                 return parseInformMessage(message);
 
-                */
 
             case ACLMessage.CONFIRM:
                 return parseConfirmMessage(message);
+
 
             default:
                 return null;
@@ -54,6 +54,22 @@ public abstract class Message implements Header {
         switch (tp){
             case HANDSHAKE:
                 return new HandshakeResponse(message);
+
+            default:
+                return null;
+
+        }
+
+    }
+
+    private static Message parseInformMessage(ACLMessage message){
+        String[] args = message.getContent().split(Header.SEPARATOR);
+        String tp;
+
+        tp = args[0];
+        switch (tp){
+            case ORDER:
+                return new OrderMessage(message);
 
             default:
                 return null;

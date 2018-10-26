@@ -46,6 +46,10 @@ public class PostMan extends Agent {
         return position;
     }
 
+    public String getPostManName() {
+        return name;
+    }
+
     public void updatePostOfficePosition(Point position){
         this.postOfficePosition = position;
 

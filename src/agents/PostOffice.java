@@ -2,7 +2,9 @@ package agents;
 
 import communication.handlers.postOffice.Handler;
 import java.util.ArrayList;
+import java.util.Random;
 
+import communication.messages.OrderMessage;
 import elements.Order;
 import elements.Point;
 import elements.PostManID;
@@ -15,6 +17,7 @@ public class PostOffice extends Agent {
     private Point position;
 	private ArrayList<PostManID> postMen = new ArrayList<PostManID>();
 	private ArrayList<Order> orders = new ArrayList<Order>();
+	private long lastOrderTime = System.currentTimeMillis();
 
     private PostOffice instance;
 
@@ -59,15 +62,31 @@ public class PostOffice extends Agent {
         @Override
         public void action() {
 
-            /*
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                //e.printStackTrace();
-            }
-            */
-            //send(new OrderMessage(new Point(8.8, -5.3),48,postMen).toACL());
+            generateOrder();
+
         }
+
+        private void generateOrder(){
+            long diff = System.currentTimeMillis() - lastOrderTime;
+
+            if(diff >= 5000){
+                lastOrderTime = System.currentTimeMillis();
+
+                Random rand = new Random();
+                double x =  (double)Math.round(-25 + (25 + 25) * rand.nextDouble() * 1000d) / 1000d;
+                double y = (double)Math.round(-25 + (25 + 25) * rand.nextDouble() * 1000d) / 1000d;
+                int i = rand.nextInt(8) + 1;
+
+                ACLMessage message = new OrderMessage(new Point(x, y),i*12,postMen).toACL();
+                if(message != null){
+                    System.out.println("[POSTOFFICE] " + message.getPerformative() + " - " + message.getContent());
+                    send(message);
+                }
+
+            }
+
+        }
+
     }
 
 
