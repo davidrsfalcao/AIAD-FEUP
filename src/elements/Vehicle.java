@@ -13,10 +13,10 @@ public class Vehicle {
     }
 
     public double getTravelPrice(double distance){
-        return distance * averageConsumption * electricityPrice;
+        return (double)Math.round(distance * averageConsumption * electricityPrice * 1000d) / 1000d;
     }
     
-    public int getMaxiumLoad() {
+    public int getMaximumLoad() {
     	return maximumLoad;
     }
 

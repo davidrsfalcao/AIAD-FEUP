@@ -23,13 +23,13 @@ public class PostMan extends Agent {
     private Vehicle vehicle;
     private PostMan instance;
 
-    public PostMan(String name, Point position, AID postOffice,int capacity){
+    public PostMan(String name, Point position, AID postOffice, int capacity){
         this.name = name;
         this.position = position;
         this.postOffice = postOffice;
         Random rnd = new Random();
-        int comsuption = rnd.nextInt(51)+100;
-        vehicle = new Vehicle(capacity,comsuption);
+        int consumption = rnd.nextInt(51)+100;
+        vehicle = new Vehicle(capacity,consumption);
         instance = this;
 
     }
@@ -46,8 +46,8 @@ public class PostMan extends Agent {
         return position;
     }
 
-    public String getPostManName() {
-        return name;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
     public void updatePostOfficePosition(Point position){

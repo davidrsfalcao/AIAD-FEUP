@@ -5,6 +5,7 @@ public interface Header {
 
     String HANDSHAKE = "HANDSHAKE";
     String ORDER = "ORDER";
+    String PROPOSAL = "PROPOSAL";
 
 
 }

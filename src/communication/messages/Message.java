@@ -17,9 +17,11 @@ public abstract class Message implements Header {
             case ACLMessage.INFORM:
                 return parseInformMessage(message);
 
-
             case ACLMessage.CONFIRM:
                 return parseConfirmMessage(message);
+
+            case ACLMessage.PROPOSE:
+                return parseProposeMessage(message);
 
 
             default:
@@ -69,6 +71,22 @@ public abstract class Message implements Header {
         tp = args[0];
         switch (tp){
             case ORDER:
+                return new OrderMessage(message);
+
+            default:
+                return null;
+
+        }
+
+    }
+
+    private static Message parseProposeMessage(ACLMessage message){
+        String[] args = message.getContent().split(Header.SEPARATOR);
+        String tp;
+
+        tp = args[0];
+        switch (tp){
+            case PROPOSAL:
                 return new OrderMessage(message);
 
             default:
