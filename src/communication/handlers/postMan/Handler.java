@@ -1,30 +1,29 @@
 package communication.handlers.postMan;
 
 import agents.PostMan;
-import communication.messages.Message;
 import jade.lang.acl.ACLMessage;
-import static communication.Header.HANDSHAKE;
-import static communication.Header.ORDER;
+import static communication.Header.Handshake;
+import static communication.Header.Proposal;
 
 public class Handler {
 
     public static ACLMessage parse(ACLMessage message, PostMan postMan){
-
         if(message != null){
-            Message content = Message.parse(message);
-            if(content != null){
-                switch (content.getType()){
-                    case HANDSHAKE:
-                        return HelloHandler.parse(message, postMan);
+            if(message.getReplyWith() != null){
+                switch (message.getReplyWith()){
+                    case Handshake:
+                        return HandshakeHandler.parse(message, postMan);
 
-                    case ORDER:
-                        return OrderHandler.parse(message, postMan);
+                    case Proposal:
+                        return ProposalHandler.parse(message, postMan);
 
                     default:
-                         return null;
+                        return null;
+
                 }
             }
+            else return null;
         }
-        return null;
+        else return null;
     }
 }

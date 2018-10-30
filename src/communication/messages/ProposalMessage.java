@@ -1,5 +1,6 @@
 package communication.messages;
 
+import communication.Header;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 
@@ -15,27 +16,21 @@ public class ProposalMessage extends Message {
 
     public ProposalMessage(ACLMessage msg){
         String[] args = msg.getContent().split(SEPARATOR);
-        if(args.length != 2)
-            return;
-        else {
-            type = PROPOSAL;
-            cost = Double.parseDouble(args[1]);
-        }
+        cost = Double.parseDouble(args[0]);
     }
 
     public double getCost() {
         return cost;
     }
 
-    public AID getReceiver() {
-        return receiver;
-    }
-
     @Override
     public ACLMessage toACL() {
         ACLMessage msg = new ACLMessage(ACLMessage.PROPOSE);
-        msg.setContent(ORDER + SEPARATOR + cost);
         msg.addReceiver(receiver);
+        msg.setOntology(Header.Proposal);
+        msg.setReplyWith(Header.Decision);
+        msg.setContent(cost + "");
+
         return msg;
     }
 }

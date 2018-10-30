@@ -8,11 +8,11 @@ public class PostManID {
 	private double rating;
 	private int nrEntregas;
 	
-	public PostManID(String name,AID id) {
-		this.name=name;
-		this.id=id;
-		rating=0;
-		nrEntregas=0;
+	public PostManID(AID id) {
+		name = id.getLocalName();
+		this.id = id;
+		rating = 0;
+		nrEntregas = 0;
 	}
 	
 	public void setName(String name) {

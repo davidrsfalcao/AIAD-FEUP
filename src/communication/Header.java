@@ -3,9 +3,10 @@ package communication;
 public interface Header {
     String SEPARATOR = " ";
 
-    String HANDSHAKE = "HANDSHAKE";
-    String ORDER = "ORDER";
-    String PROPOSAL = "PROPOSAL";
+    String Handshake = "Handshake";
+    String Order = "Order";
+    String Proposal = "Proposal";
+    String Decision = "Decision";
 
 
 }

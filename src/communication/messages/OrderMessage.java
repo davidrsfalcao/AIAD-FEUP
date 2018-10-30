@@ -1,5 +1,6 @@
 package communication.messages;
 
+import communication.Header;
 import elements.Point;
 import elements.PostManID;
 import jade.lang.acl.ACLMessage;
@@ -20,15 +21,11 @@ public class OrderMessage extends Message {
 
     public OrderMessage(ACLMessage msg){
         String[] args = msg.getContent().split(SEPARATOR);
-        if(args.length != 4)
-            return;
-        else {
-            type = ORDER;
-            double x = Double.parseDouble(args[1]);
-            double y = Double.parseDouble(args[2]);
-            position = new Point(x,y);
-            estimatedTime = Integer.parseInt(args[3]);
-        }
+        double x = Double.parseDouble(args[0]);
+        double y = Double.parseDouble(args[1]);
+        position = new Point(x,y);
+        estimatedTime = Integer.parseInt(args[2]);
+
     }
 
     public Point getPosition() {
@@ -41,11 +38,13 @@ public class OrderMessage extends Message {
 
     @Override
     public ACLMessage toACL() {
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent(ORDER + SEPARATOR + position.getX() + SEPARATOR + position.getY() + SEPARATOR + estimatedTime);
+        ACLMessage msg = new ACLMessage(ACLMessage.PROPAGATE);
         for(PostManID receiver : receivers){
             msg.addReceiver(receiver.getId());
         }
+        msg.setOntology(Header.Order);
+        msg.setReplyWith(Header.Proposal);
+        msg.setContent(position.getX() + SEPARATOR + position.getY() + SEPARATOR + estimatedTime);
         return msg;
     }
 }

@@ -1,27 +1,30 @@
 package communication.handlers.postOffice;
 
 import agents.PostOffice;
-import communication.messages.Message;
 import jade.lang.acl.ACLMessage;
 
-import static communication.Header.HANDSHAKE;
+import static communication.Header.Handshake;
+
 
 public class Handler {
 
     public static ACLMessage parse(ACLMessage message, PostOffice postOffice){
 
         if(message != null){
-            Message content = Message.parse(message);
-            if(content != null){
-                switch (content.getType()){
-                    case HANDSHAKE:
-                        return HelloHandler.parse(message, postOffice);
+            if(message.getReplyWith() != null){
+                switch (message.getReplyWith()){
+
+                    case Handshake:
+                        return HandshakeHandler.parse(message, postOffice);
 
                     default:
                         return null;
+
                 }
             }
+            else return null;
         }
-        return null;
+        else return null;
     }
+
 }

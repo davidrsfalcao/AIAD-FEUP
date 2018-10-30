@@ -21,10 +21,10 @@ Postman                   	|       |  PostOffice
 [Subscribe] *Handshake* | > | Guarda ID e nome do sender |
 Guarda Posição do PostOffice | < | [Confirm] *Handshake* |
 Espera uma order |   | Gera uma order |
-Calcula a sua oferta |  < | [Inform] *Order* |
+Calcula a sua oferta |  < | [Propagate] *Order* |
 [Propose] Proposal | > | Guarda o proposta |
 Aguarda resposta |   | Calcula a melhor proposta |
-Analisa resposta | < | [ACCEPT\_PROPOSAL] *Proposal* <br> ou <br> [REJECT\_PROPOSAL] *Proposal*
+Analisa resposta | < | [ACCEPT\_PROPOSAL] *Decision* <br> ou <br> [REJECT\_PROPOSAL] * Decision*
 
 ### Mensagens
 
@@ -64,3 +64,51 @@ Handler mensagem:
 	}
 ```
 
+#### 3. Order
+```javascript
+	ACLMessage{
+		performative: propagate;
+		sender: PostOffice;
+		receiver: PostMen;
+		ontology: Order;
+		reply-with: Proposal;
+		content: position-x position-y estimated-time
+	}
+```
+
+#### 4. Proposal
+```javascript
+	ACLMessage{
+		performative: propose;
+		sender: PostMan;
+		receiver: PostOffice;
+		ontology: Proposal;
+		reply-with: Decision;
+		content: position-x position-y estimated-time
+	}
+```
+
+#### 4. Decision
+##### 4.1 Decision (accept)
+```javascript
+	ACLMessage{
+		performative: accept_proposal;
+		sender: PostOffice;
+		receiver: PostMan;
+		ontology: Decision;
+		reply-with: null;
+		content: null
+	}
+```
+
+##### 4.2 Decision (reject)
+```javascript
+	ACLMessage{
+		performative: reject_proposal;
+		sender: PostOffice;
+		receiver: PostMan;
+		ontology: Decision;
+		reply-with: null;
+		content: null
+	}
+```
