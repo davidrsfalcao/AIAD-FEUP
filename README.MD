@@ -88,8 +88,8 @@ Handler mensagem:
 	}
 ```
 
-#### 4. Decision
-##### 4.1 Decision (accept)
+#### 5. Decision
+##### 5.1 Decision (accept)
 ```javascript
 	ACLMessage{
 		performative: accept_proposal;
@@ -101,7 +101,7 @@ Handler mensagem:
 	}
 ```
 
-##### 4.2 Decision (reject)
+##### 5.2 Decision (reject)
 ```javascript
 	ACLMessage{
 		performative: reject_proposal;
