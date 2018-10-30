@@ -49,7 +49,7 @@ public class PostOffice extends Agent {
                 ACLMessage reply = Handler.parse(msg, instance);
                 if(reply != null){
                     send(reply);
-                    System.out.println("[POSTOFFICE] " + reply.getPerformative() + " - " + reply.getContent());
+                    System.out.println("[POSTOFFICE] " + reply.getPerformative() + " - " + reply.getOntology() + " - " + reply.getContent());
                 }
             } else {
                 block();
@@ -79,7 +79,7 @@ public class PostOffice extends Agent {
 
                 ACLMessage message = new OrderMessage(new Point(x, y),i*12,postMen).toACL();
                 if(message != null){
-                    System.out.println("[POSTOFFICE] " + message.getPerformative() + " - " + message.getContent());
+                    System.out.println("[POSTOFFICE] " + message.getPerformative() + " - " + message.getOntology() + " - " + message.getContent());
                     send(message);
                 }
 

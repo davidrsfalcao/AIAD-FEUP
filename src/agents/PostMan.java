@@ -2,6 +2,8 @@ package agents;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import communication.Header;
 import communication.handlers.postMan.Handler;
 import communication.messages.HandshakeMessage;
 import elements.Order;
@@ -12,7 +14,6 @@ import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 
-import static communication.Header.HANDSHAKE;
 
 public class PostMan extends Agent {
     private String name;
@@ -60,8 +61,8 @@ public class PostMan extends Agent {
 
         @Override
         public void action() {
-            System.out.println("[POSTMAN " + name + "] " + ACLMessage.SUBSCRIBE + " - " +  HANDSHAKE + " " + name);
-            send(new HandshakeMessage(name, postOffice).toACL());
+            System.out.println("[POSTMAN " + name + "] " + ACLMessage.SUBSCRIBE + " - " + Header.Handshake);
+            send(new HandshakeMessage(postOffice).toACL());
 
             while(true){
                 ACLMessage msg = receive();
@@ -70,7 +71,7 @@ public class PostMan extends Agent {
 
                     if(reply != null){
                         send(reply);
-                        System.out.println("[POSTMAN " + name + " ] " + reply.getPerformative() + " - " + reply.getContent());
+                        System.out.println("[POSTMAN " + name + " ] " + reply.getPerformative() + " - " + reply.getOntology() + " - " + reply.getContent());
                     }
                   
                 } else {

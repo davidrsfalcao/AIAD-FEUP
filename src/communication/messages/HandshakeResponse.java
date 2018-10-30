@@ -1,27 +1,23 @@
 package communication.messages;
 
+import communication.Header;
 import elements.Point;
 import jade.lang.acl.ACLMessage;
 public class HandshakeResponse extends Message {
 
-    private ACLMessage msg;
+    private ACLMessage message;
     private Point position;
 
-    public HandshakeResponse(ACLMessage msg, Point position) {
-        this.msg = msg;
+    public HandshakeResponse(ACLMessage message, Point position) {
+        this.message = message;
         this.position = position;
     }
 
     public HandshakeResponse(ACLMessage msg){
         String[] args = msg.getContent().split(SEPARATOR);
-        if(args.length != 3)
-            return;
-        else {
-            double x =  Double.parseDouble(args[1]);
-            double y =  Double.parseDouble(args[2]);
-            position = new Point(x,y);
-            type = HANDSHAKE;
-        }
+        double x =  Double.parseDouble(args[0]);
+        double y =  Double.parseDouble(args[1]);
+        position = new Point(x,y);
     }
 
     public Point getPosition() {
@@ -30,9 +26,11 @@ public class HandshakeResponse extends Message {
 
     @Override
     public ACLMessage toACL() {
-        ACLMessage reply = msg.createReply();
+        ACLMessage reply = message.createReply();
         reply.setPerformative(ACLMessage.CONFIRM);
-        reply.setContent(HANDSHAKE + SEPARATOR + position.getX() + SEPARATOR + position.getY());
+        reply.setOntology(Header.Handshake);
+        reply.setReplyWith(null);
+        reply.setContent(position.getX() + SEPARATOR + position.getY());
         return reply;
     }
 

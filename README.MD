@@ -64,3 +64,26 @@ Handler mensagem:
 	}
 ```
 
+#### 3. Order
+```javascript
+	ACLMessage{
+		performative: propagate;
+		sender: PostOffice;
+		receiver: PostMen;
+		ontology: Order;
+		reply-with: Proposal;
+		content: position-x position-y estimated-time
+	}
+```
+
+#### 4. Proposal
+```javascript
+	ACLMessage{
+		performative: propose;
+		sender: PostMan;
+		receiver: PostOffice;
+		ontology: Proposal;
+		reply-with: Decision;
+		content: position-x position-y estimated-time
+	}
+```

@@ -1,37 +1,24 @@
 package communication.messages;
 
+import communication.Header;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 
 public class HandshakeMessage extends Message {
 
-    private String name;
     private AID receiver;
+    private ACLMessage message;
 
-    public HandshakeMessage(String name, AID receiver) {
-        this.name = name;
+    public HandshakeMessage(AID receiver) {
         this.receiver = receiver;
-    }
-
-    public HandshakeMessage(ACLMessage msg){
-        String[] args = msg.getContent().split(SEPARATOR);
-        if(args.length != 2)
-            return;
-        else {
-            this.type = HANDSHAKE;
-            this.name = args[1];
-        }
-    }
-
-    public String getName() {
-        return name;
     }
 
     @Override
     public ACLMessage toACL() {
         ACLMessage msg = new ACLMessage(ACLMessage.SUBSCRIBE);
-        msg.setContent(HANDSHAKE + SEPARATOR + name);
         msg.addReceiver(receiver);
+        msg.setOntology(Header.Handshake);
+        msg.setReplyWith(Header.Handshake);
         return msg;
     }
 }
