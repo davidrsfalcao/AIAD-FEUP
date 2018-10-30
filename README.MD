@@ -21,7 +21,7 @@ Postman                   	|       |  PostOffice
 [Subscribe] *Handshake* | > | Guarda ID e nome do sender |
 Guarda Posição do PostOffice | < | [Confirm] *Handshake* |
 Espera uma order |   | Gera uma order |
-Calcula a sua oferta |  < | [Inform] *Order* |
+Calcula a sua oferta |  < | [Propagate] *Order* |
 [Propose] Proposal | > | Guarda o proposta |
 Aguarda resposta |   | Calcula a melhor proposta |
 Analisa resposta | < | [ACCEPT\_PROPOSAL] *Proposal* <br> ou <br> [REJECT\_PROPOSAL] *Proposal*
