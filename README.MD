@@ -8,7 +8,7 @@ Numa primeira fase os carteiros fazem uma oferta fixa, por exemplo, cada serviç
 
 Numa segunda fase pretende-se que os carteiros sejam mais competitivos. Logo, incluiremos outras variáveis como o tempo que demoram a ir buscar e entregar um pacote, um preço por km, entre outros. Tudo isto começa com um valor fixo, por exemplo, 1 unidade monetária por km.
 
-Um outro exemplo seria um carteiro que aceitou um serviço e agora só aceitará as entregas que ficarem a x distância do primeiro serviço. 
+Um outro exemplo seria um carteiro que aceitou um serviço e agora só aceitará as entregas que ficarem a x distância do primeiro serviço.
 
 Uma outra opção seria um carteiro que já aceitou um serviço e agora para um novo serviço na mesma zona, apresentará um preço mais baixo tornando-se mais competitivo.
 
@@ -88,8 +88,8 @@ Handler mensagem:
 	}
 ```
 
-#### 4. Decision
-##### 4.1 Decision (accept)
+#### 5. Decision
+##### 5.1 Decision (accept)
 ```javascript
 	ACLMessage{
 		performative: accept_proposal;
@@ -101,7 +101,7 @@ Handler mensagem:
 	}
 ```
 
-##### 4.2 Decision (reject)
+##### 5.2 Decision (reject)
 ```javascript
 	ACLMessage{
 		performative: reject_proposal;
