@@ -43,11 +43,11 @@ Handler mensagem:
 #### 1. Handshake(PostMan)
 ```javascript
 	ACLMessage{
-		performative: subscribe
-		sender: PostMan
-		receiver: Postoffice
-		ontology: Handshake
-		reply-with: Handshake
+		performative: subscribe;
+		sender: PostMan;
+		receiver: Postoffice;
+		ontology: Handshake;
+		reply-with: Handshake;
 		content: null
 	}
 ```
@@ -55,11 +55,11 @@ Handler mensagem:
 #### 2. Handshake(PostOffice)
 ```javascript
 	ACLMessage{
-		performative: confirm
-		sender: PostOffice
-		receiver: PostMan
-		ontology: Handshake
-		reply-with: nothing
+		performative: confirm;
+		sender: PostOffice;
+		receiver: PostMan;
+		ontology: Handshake;
+		reply-with: null;
 		content: position-x position-y
 	}
 ```
