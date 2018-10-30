@@ -11,9 +11,6 @@ public class Handler {
         if(message != null){
             if(message.getReplyWith() != null){
                 switch (message.getReplyWith()){
-                    case Handshake:
-                        return HandshakeHandler.parse(message, postMan);
-
                     case Proposal:
                         return ProposalHandler.parse(message, postMan);
 
@@ -22,7 +19,19 @@ public class Handler {
 
                 }
             }
-            else return null;
+            else {
+                if(message.getOntology() != null){
+                    switch(message.getOntology()){
+                        case Handshake:
+                            return HandshakeHandler.parse(message, postMan);
+                            
+                    }
+
+                }
+
+                return null;
+
+            }
         }
         else return null;
     }
