@@ -2,6 +2,7 @@ package communication;
 
 public interface Header {
     String SEPARATOR = " ";
+    String Null = "null";
 
     String Handshake = "Handshake";
     String Order = "Order";

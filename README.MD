@@ -24,7 +24,12 @@ Espera uma order |   | Gera uma order |
 Calcula a sua oferta |  < | [Propagate] *Order* |
 [Propose] Proposal | > | Guarda o proposta |
 Aguarda resposta |   | Calcula a melhor proposta |
-Analisa resposta | < | [ACCEPT\_PROPOSAL] *Decision* <br> ou <br> [REJECT\_PROPOSAL] * Decision*
+Analisa resposta | < | [ACCEPT\_PROPOSAL] *Decision* <br> ou <br> [REJECT\_PROPOSAL] * Decision* |
+...|   |  ...
+A cada segundo | < | [QUERY_IF] *Alive* |
+[Confirm] *Alive* | > | Verifica a atividade dos postmen 
+
+
 
 ### Mensagens
 
@@ -108,6 +113,31 @@ Handler mensagem:
 		sender: PostOffice;
 		receiver: PostMan;
 		ontology: Decision;
+		reply-with: null;
+		content: null
+	}
+```
+
+#### 6. Alive
+##### 6.1 Alive (PostOffice)
+```javascript
+	ACLMessage{
+		performative: query_if;
+		sender: PostOffice;
+		receiver: PostMen;
+		ontology: Alive;
+		reply-with: Alive;
+		content: null
+	}
+```
+
+##### 6.2 Alive (PostMan)
+```javascript
+	ACLMessage{
+		performative: confirm;
+		sender: PostMan;
+		receiver: PostOffice;
+		ontology: Alive;
 		reply-with: null;
 		content: null
 	}
