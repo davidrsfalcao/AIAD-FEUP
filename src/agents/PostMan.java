@@ -23,6 +23,7 @@ public class PostMan extends Agent {
     private ArrayList<Order> orders = new ArrayList();
     private Vehicle vehicle;
     private PostMan instance;
+    private boolean goingToPostOffice;
 
     public PostMan(String name, Point position, AID postOffice, int capacity){
         this.name = name;
@@ -32,7 +33,49 @@ public class PostMan extends Agent {
         int consumption = rnd.nextInt(51)+100;
         vehicle = new Vehicle(capacity,consumption);
         instance = this;
+        goingToPostOffice = false;
 
+    }
+    
+    public boolean getGoingToPostOffice() {
+    	return goingToPostOffice;
+    }
+    
+    public void updateGoingToPostOffice() {
+    	
+    	Point p= new Point(0,0);
+    	
+    	if(position == p) {
+    		goingToPostOffice = false;
+    		return;
+    	}
+    	
+    	if(goingToPostOffice) {
+    		goingToPostOffice = false;
+    	}else {
+    		goingToPostOffice = true;
+    	}
+    }
+    
+    public double costCalculator(Point orderPos) {
+    	
+    	if(goingToPostOffice){
+    		double dist = orders.get(orders.size()-1).getDestiny().getDistance(orderPos); //distance between last Order Position and New Order
+    		if(((vehicle.getCurrentLoad()/vehicle.getMaximumLoad())*100) >= 80) { // Since the car is almost full,the postman will charge more
+    			return vehicle.getTravelPrice(dist)*1.5;
+    		}else {
+    			return vehicle.getTravelPrice(dist);
+    		}
+    	}else {
+    		double dist1 = position.getDistance(postOfficePosition);
+    		double dist2 = postOfficePosition.getDistance(orderPos);
+    		if(((vehicle.getCurrentLoad()/vehicle.getMaximumLoad())*100) >= 80) { // Since the car is almost full,the postman will charge more
+    			return (vehicle.getTravelPrice(dist1) + vehicle.getTravelPrice(dist2))*1.5;
+    		}else {
+    			return vehicle.getTravelPrice(dist1) + vehicle.getTravelPrice(dist2);
+    		}
+    	}
+    	
     }
 
     public void setup() {
