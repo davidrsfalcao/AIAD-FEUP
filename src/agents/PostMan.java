@@ -60,7 +60,19 @@ public class PostMan extends Agent {
     public double costCalculator(Point orderPos) {
     	
     	if(goingToPostOffice){
-    		double dist = orders.get(orders.size()-1).getDestiny().getDistance(orderPos); //distance between last Order Position and New Order
+    		int index = 0;
+    		double dist = 0;
+    		for(int i=0;i < orders.size();i++) {
+    			if(orderPos.getDistance(this.postOfficePosition) < orders.get(i).getDestiny().getDistance(this.postOfficePosition)) {
+    				index = i-1;
+    				break;
+    			}
+    		}
+    		if(index == -1) {
+    			dist = orderPos.getDistance(this.postOfficePosition);
+    		}else {
+    			dist = orders.get(index).getDestiny().getDistance(orderPos); //distance between closest Position and New Order
+    		}
     		if(((vehicle.getCurrentLoad()/vehicle.getMaximumLoad())*100) >= 80) { // Since the car is almost full,the postman will charge more
     			return vehicle.getTravelPrice(dist)*1.5;
     		}else {
