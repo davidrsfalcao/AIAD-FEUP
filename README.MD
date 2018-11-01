@@ -2,20 +2,20 @@
 
 ## Index
 
-1. [Descrição](#1-descrição)
-2. [Estratégias](#2-estratégias)
+1. [Descrição](#descrição)
+2. [Estratégias](#estratégias)
      * Estratégia 1
      * Estratégia 2
-3. [Comunicação](#3-comunicação)
-	* Mensagens
-	* Handlers
-4. [Developers](#4-developers)
+3. [Comunicação](#comunicação)
+	* [Mensagens](#mensagens)
+	* [Handlers](#handlers)
+4. [Developers](#developers)
      		 
 
-## 1. Descrição
+## Descrição
 Pretende-se implementar um sistema de distribuição de correio no qual vários carteiros negociam com o posto de correios que correspondência vão entregar, tendo estes um limite de correspondência que podem transportar. Os carteiros recebem um valor por cada entrega feita. Assim os Carteiros tentam receber o máximo possível, tentando minimizar as despesas em viagens a locais mais distantes. O Posto de Correio pretende que as entregas sejam feitas com a menor possibilidade de atraso possível e com o menor preço possível. Há portanto carteiros que irão assegurar uma probabilidade maior de entrega sem atrasos do que outros e carteiros que por serem mais competentes irão cobrar mais ao Posto de Correios.
 
-## 2. Estratégias
+## Estratégias
 
 Numa primeira fase os carteiros fazem uma oferta fixa, por exemplo, cada serviço custa 5 unidades monetárias e o carteiro tem uma capacidade máxima de 10 serviços.
 
@@ -26,7 +26,7 @@ Um outro exemplo seria um carteiro que aceitou um serviço e agora só aceitará
 Uma outra opção seria um carteiro que já aceitou um serviço e agora para um novo serviço na mesma zona, apresentará um preço mais baixo tornando-se mais competitivo.
 
 
-## 3. Comunicação
+## Comunicação
 
 
 Postman                   	|       |  PostOffice
@@ -44,7 +44,7 @@ A cada segundo | < | [QUERY_IF] *Alive* |
 
 
 
-### 3.1 Mensagens
+### Mensagens
 
 Enviar mensagem(exemplo):
 
@@ -57,8 +57,8 @@ Handler mensagem:
 ```java
 	ACLMessage reply = Handler.parse(msg, instance);
 ```
-#### 3.1.1. Handshake
-##### 3.1.1.1 Handshake(PostMan)
+#### Handshake
+##### Handshake(PostMan)
 ```javascript
 	ACLMessage{
 		performative: subscribe;
@@ -70,7 +70,7 @@ Handler mensagem:
 	}
 ```
 
-##### 3.1.1.2 Handshake(PostOffice)
+##### Handshake(PostOffice)
 ```javascript
 	ACLMessage{
 		performative: confirm;
@@ -82,7 +82,7 @@ Handler mensagem:
 	}
 ```
 
-#### 3.1.2. Order
+#### Order
 ```javascript
 	ACLMessage{
 		performative: propagate;
@@ -94,7 +94,7 @@ Handler mensagem:
 	}
 ```
 
-#### 3.1.3. Proposal
+#### Proposal
 ```javascript
 	ACLMessage{
 		performative: propose;
@@ -106,8 +106,8 @@ Handler mensagem:
 	}
 ```
 
-#### 3.1.4. Decision
-##### 3.1.4.1 Decision (accept)
+#### Decision
+##### Decision (accept)
 ```javascript
 	ACLMessage{
 		performative: accept_proposal;
@@ -119,7 +119,7 @@ Handler mensagem:
 	}
 ```
 
-##### 3.1.4.2 Decision (reject)
+##### Decision (reject)
 ```javascript
 	ACLMessage{
 		performative: reject_proposal;
@@ -131,8 +131,8 @@ Handler mensagem:
 	}
 ```
 
-#### 3.1.5. Alive
-##### 3.1.5.1 Alive (PostOffice)
+#### Alive
+##### Alive (PostOffice)
 ```javascript
 	ACLMessage{
 		performative: query_if;
@@ -144,7 +144,7 @@ Handler mensagem:
 	}
 ```
 
-##### 3.1.5.2 Alive (PostMan)
+##### Alive (PostMan)
 ```javascript
 	ACLMessage{
 		performative: confirm;
@@ -156,9 +156,9 @@ Handler mensagem:
 	}
 ```
 
-### 3.2 Handlers
+### Handlers
 
-## 4. Developers
+## Developers
 - David Falcão [@davidrsfalcao](https://github.com/davidrsfalcao)
 - Pedro Miranda [@pmiranda07](https://github.com/pmiranda07)
 - Verónica Fradique [@veronicafradique](https://github.com/veronicafradique)
