@@ -8,6 +8,11 @@
      * Estratégia 2
 3. [Comunicação](#comunicação)
 	* [Mensagens](#mensagens)
+		* [Handshake](#handshake)
+		* [Order](#order)
+		* [Proposal](#proposal)
+		* [Decision](#decision)
+		* [Alive](#alive)
 	* [Handlers](#handlers)
 4. [Developers](#developers)
      		 
