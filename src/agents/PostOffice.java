@@ -33,7 +33,7 @@ public class PostOffice extends Agent {
 
     public void addPostman(PostManID postManID){
         postMen.add(postManID);
-        System.out.println(" --- NEW POSTMAN ---");
+        System.out.println(" --- POSTOFFICE ADDED "+ postManID.getName()  +" ---");
     }
 
     public Point getPosition() {
@@ -88,6 +88,5 @@ public class PostOffice extends Agent {
         }
 
     }
-
 
 }

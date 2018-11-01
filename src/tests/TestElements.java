@@ -14,7 +14,6 @@ public class TestElements {
         Point p2 = new Point(2, 2);
         Point p3 = new Point(0,0);
 
-
         assertEquals(2, p1.getDistance(p2));
         assertEquals(Math.sqrt(8), p2.getDistance(p3));
 
