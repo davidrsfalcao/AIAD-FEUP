@@ -10,16 +10,25 @@ import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 
-public class MailCompany {
 
-    AgentContainer mainContainer;
-    AgentContainer agentsContainer;
+/**
+ * Class that represents a Mail Company, with one PostOffice and at least one PostMan
+ */
+class MailCompany {
 
-    public MailCompany() {
+    private AgentContainer agentsContainer;
+
+    /**
+     * Default constructor of MailCompany
+     */
+    private MailCompany() {
         super();
     }
 
-    public void start(){
+    /**
+     * Start the Mail Company
+     */
+    void start(){
         try {
             initJade();
             initAgents();
@@ -28,7 +37,12 @@ public class MailCompany {
         }
     }
 
-    public void initJade() throws StaleProxyException {
+    /**
+     * Launches the main containers with ams, df and rma agents and the agents container
+     *
+     * @throws StaleProxyException - Launches StaleProxyException in case of fail
+     */
+    private void initJade() throws StaleProxyException {
         // Get a hold on JADE runtime
         Runtime rt = Runtime.instance();
 
@@ -41,7 +55,7 @@ public class MailCompany {
         System.out.print("profile created\n");
 
         System.out.println("Launching a whole in-process platform..."+profile);
-        mainContainer = rt.createMainContainer(profile);
+        AgentContainer mainContainer = rt.createMainContainer(profile);
 
         // now set the default Profile to start a container
         ProfileImpl pContainer = new ProfileImpl(null, 1200, null);
@@ -57,7 +71,12 @@ public class MailCompany {
 
     }
 
-    public void initAgents() throws StaleProxyException {
+    /**
+     * Function that add the PostMan and PostOffices to agentsContainer and start them
+     *
+     * @throws StaleProxyException - Launches StaleProxyException in case of fail
+     */
+    void initAgents() throws StaleProxyException {
 
         PostOffice postOffice = new PostOffice(new Point(0,0));
         agentsContainer.acceptNewAgent("PostOffice", postOffice).start();

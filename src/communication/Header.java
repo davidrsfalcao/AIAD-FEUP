@@ -1,5 +1,8 @@
 package communication;
 
+/**
+ * Interface with all headers of messages
+ */
 public interface Header {
     String SEPARATOR = " ";
     String Null = "null";
@@ -9,6 +12,4 @@ public interface Header {
     String Proposal = "Proposal";
     String Decision = "Decision";
     String Alive = "Decision";
-
-
 }

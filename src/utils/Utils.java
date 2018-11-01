@@ -3,15 +3,30 @@ package utils;
 import agents.PostMan;
 import elements.Order;
 import elements.Point;
-
 import java.util.ArrayList;
 
+/**
+ * Class with random useful function
+ */
 public class Utils {
 
+    /**
+     * Algorithm to sort a vector of orders in function of the distance  to the postman
+     *
+     * @param postMan - Postman who will have the ordered orders
+     */
     public static void sortOrders(PostMan postMan){
         sortOrders(postMan.getOrders(), postMan.getPosition(), 0, postMan.getOrders().size());
     }
 
+    /**
+     * Algorithm to sort a vector of orders in function of the distance  to the postman
+     *
+     * @param orders - ArrayList of orders
+     * @param position - Position of the postMan
+     * @param start - algorithm's start index of ArrayList
+     * @param end - algorithm's end index of ArrayList
+     */
     public static void sortOrders(ArrayList<Order> orders, Point position, int start, int end){
         Order aux;
         int i=start,j = end-1;

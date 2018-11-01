@@ -1,5 +1,8 @@
 package elements;
 
+/**
+ * Class that represents a point in 2D
+ */
 public class Point {
 
     double x, y;
@@ -37,13 +40,8 @@ public class Point {
      * @param other - other point coordinates
      * @return - distance between the two points
      */
-    
     public double getDistance(Point other){
         return Math.sqrt(Math.pow(other.getX()-this.x, 2) + Math.pow(other.getY()-this.y, 2));
     }
 
-    @Override
-    public String toString() {
-        return "x:" + x + "  y:" + y;
-    }
 }
