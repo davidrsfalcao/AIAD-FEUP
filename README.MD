@@ -16,7 +16,7 @@ Repositório do projeto de "Agentes e Inteligência Artificial Distribuída", un
 		* [Decision](#decision)
 		* [Alive](#alive)
 	* [Handlers](#handlers)
-*  <a href="https://davidrsfalcao.github.io/AIAD-FEUP/overview-summary.html" target="_blank">Documentação</a>
+* [Documentação](https://davidrsfalcao.github.io/AIAD-FEUP/overview-summary.html){:target="_blank"}
 * [Developers](#developers)
      		 
 
