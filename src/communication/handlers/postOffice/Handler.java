@@ -3,8 +3,7 @@ package communication.handlers.postOffice;
 import agents.PostOffice;
 import jade.lang.acl.ACLMessage;
 
-import static communication.Header.Handshake;
-import static communication.Header.Null;
+import static communication.Header.*;
 
 
 public class Handler {
@@ -18,6 +17,17 @@ public class Handler {
 
                 case Handshake:
                     return HandshakeHandler.parse(message, postOffice);
+
+                case Null:
+                    String ontology = (message.getOntology() != null) ? message.getOntology() : Null;
+                    switch (ontology){
+                        case Alive:
+                            return AliveHandler.parse(message, postOffice);
+
+                        default:
+                            return null;
+
+                    }
 
                 default:
                     return null;

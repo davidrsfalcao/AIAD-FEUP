@@ -2,9 +2,7 @@ package communication.handlers.postMan;
 
 import agents.PostMan;
 import jade.lang.acl.ACLMessage;
-import static communication.Header.Handshake;
-import static communication.Header.Null;
-import static communication.Header.Proposal;
+import static communication.Header.*;
 
 public class Handler {
 
@@ -16,6 +14,9 @@ public class Handler {
             switch (replyOntology){
                 case Proposal:
                     return ProposalHandler.parse(message, postMan);
+
+                case Alive:
+                    return  AliveHandler.parse(message);
 
                 case Null:
                     if(message.getOntology() != null){
