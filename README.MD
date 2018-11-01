@@ -1,12 +1,14 @@
 # AIAD-FEUP
+Repositório do projeto de "Agentes e Inteligência Artificial Distribuída", unidade curricular do 4º ano do Mestrado Integrado em Engenharia Informática e Computação da Faculdade de Engenharia da Universidade do Porto
+
 
 ## Index
 
-1. [Descrição](#descrição)
-2. [Estratégias](#estratégias)
+* [Descrição](#descrição)
+* [Estratégias](#estratégias)
      * Estratégia 1
      * Estratégia 2
-3. [Comunicação](#comunicação)
+* [Comunicação](#comunicação)
 	* [Mensagens](#mensagens)
 		* [Handshake](#handshake)
 		* [Order](#order)
@@ -14,7 +16,7 @@
 		* [Decision](#decision)
 		* [Alive](#alive)
 	* [Handlers](#handlers)
-4. [Developers](#developers)
+* [Developers](#developers)
      		 
 
 ## Descrição
@@ -57,11 +59,6 @@ Enviar mensagem(exemplo):
 	send(new HandshakeMessage(name, postOffice).toACL());
 ```
 
-Handler mensagem:
-
-```java
-	ACLMessage reply = Handler.parse(msg, instance);
-```
 #### Handshake
 ##### Handshake(PostMan)
 ```javascript
@@ -162,6 +159,12 @@ Handler mensagem:
 ```
 
 ### Handlers
+
+Handler mensagem:
+
+```java
+	ACLMessage reply = Handler.parse(msg, instance);
+```
 
 ## Developers
 - David Falcão [@davidrsfalcao](https://github.com/davidrsfalcao)
