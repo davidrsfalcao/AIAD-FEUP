@@ -8,11 +8,12 @@
      * Estratégia 2
 3. [Comunicação](#3-comunicação)
      * Mensagens
-           - Handshake
-           - Order
-           - Proposal
-           - Decision
-           - Alive
+     
+           *  Handshake
+           * Order
+           * Proposal
+           * Decision
+           * Alive
      * Handlers
            - ...
 4. [Developers](#4-developers)
