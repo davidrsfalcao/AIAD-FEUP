@@ -21,7 +21,7 @@ class MailCompany {
     /**
      * Default constructor of MailCompany
      */
-    private MailCompany() {
+    MailCompany() {
         super();
     }
 
