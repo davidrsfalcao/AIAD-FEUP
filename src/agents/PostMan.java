@@ -37,7 +37,7 @@ public class PostMan extends Agent {
 
     }
     
-    public boolean getGoingToPostOffice() {
+    public boolean isGoingToPostOffice() {
     	return goingToPostOffice;
     }
     
@@ -110,6 +110,10 @@ public class PostMan extends Agent {
         this.postOfficePosition = position;
 
         System.out.println(" --- " + name + " updated PostOffice Position to " + postOfficePosition + " ---");
+    }
+
+    public void addOrder(Order order){
+        orders.add(order);
     }
 
     class PostManBehaviour extends CyclicBehaviour {

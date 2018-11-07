@@ -10,7 +10,6 @@ import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 
-
 /**
  * Class that represents a Mail Company, with one PostOffice and at least one PostMan
  */

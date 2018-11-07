@@ -1,7 +1,10 @@
 package tests;
 
+import agents.PostMan;
+import communication.handlers.postMan.ProposalHandler;
 import elements.Order;
 import elements.Point;
+import jade.lang.acl.ACLMessage;
 import org.junit.jupiter.api.Test;
 import utils.Utils;
 
@@ -33,5 +36,24 @@ public class TestAlgorithm {
         assertEquals(o2, orders.get(0));
         assertEquals(o1, orders.get(1));
         assertEquals(o3, orders.get(2));
+    }
+
+    @Test
+    public void testBestPrice(){
+        PostMan postMan = new PostMan("david", new Point(5,0), null, 10);
+
+        Order order = new Order(new Point(1,0),24);
+
+        ProposalHandler proposalHandler = new ProposalHandler();
+
+        ArrayList<Order> orders =  (ArrayList<Order>) postMan.getOrders().clone();
+        System.out.println(postMan.getOrders());
+
+        orders.add(order);
+        System.out.println(postMan.getOrders());
+        System.out.println(orders);
+
+        //postMan.addOrder(order);
+
     }
 }
