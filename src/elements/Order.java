@@ -7,6 +7,7 @@ package elements;
 public class Order {
 	private Point destiny;
 	private int timeToDelivery;
+	private int type; /* 0 : pick up | 1 : delivery */
 
     /**
      * Order constructor
@@ -15,8 +16,9 @@ public class Order {
      * @param timeToDelivery - Limit of time for delivering the order
      */
 	public Order(Point destiny,int timeToDelivery) {
-		this.destiny= destiny;
-		this.timeToDelivery=timeToDelivery;
+		this.destiny = destiny;
+		this.timeToDelivery = timeToDelivery;
+		this.type = 1;
 	}
 
     /**
@@ -37,4 +39,21 @@ public class Order {
 		return timeToDelivery;
 	}
 
+    /**
+     * Returns the type of the order
+     *
+     * @return type - 0 : pick up | 1 : delivery
+     */
+    public int getType() {
+        return type;
+    }
+
+    /**
+     * Sets up the type of the order
+     *
+     * @param type - 0 : pick up | 1 : delivery
+     */
+    public void setType(int type) {
+        this.type = type;
+    }
 }
