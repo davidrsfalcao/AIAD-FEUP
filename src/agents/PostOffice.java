@@ -8,6 +8,7 @@ import communication.messages.OrderMessage;
 import elements.Order;
 import elements.Point;
 import elements.PostManID;
+import elements.Proposal;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
@@ -55,6 +56,28 @@ public class PostOffice extends Agent {
                 block();
             }
         }
+    }
+    
+    
+    public Proposal chooseProposal(ArrayList<Proposal> proposals) {
+    	double min= 0;
+    	Proposal pA = null;
+    	for(int i=0;i < proposals.size();i++) {
+    		int ind= postMen.indexOf(proposals.get(i).getPostManID());
+    		if(i==0) {
+    			min = proposals.get(i).getPrice() * postMen.get(ind).getRating();
+    			pA= proposals.get(i);
+    		}else {
+    			double temp = proposals.get(i).getPrice() * postMen.get(ind).getRating();
+    			if(temp < min) {
+    				min = temp;
+    				pA=proposals.get(i);
+    			}
+    		}
+    		
+    	}
+    	
+    	return pA;
     }
 
     class OrderGeneratorBehaviour extends CyclicBehaviour{
