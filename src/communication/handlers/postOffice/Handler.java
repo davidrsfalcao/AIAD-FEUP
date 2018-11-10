@@ -18,6 +18,9 @@ public class Handler {
                 case Handshake:
                     return HandshakeHandler.parse(message, postOffice);
 
+                case Decision:
+                    return DecisionHandler.parse(message, postOffice);
+
                 case Null:
                     String ontology = (message.getOntology() != null) ? message.getOntology() : Null;
                     switch (ontology){

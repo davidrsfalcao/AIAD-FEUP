@@ -11,5 +11,5 @@ public interface Header {
     String Order = "Order";
     String Proposal = "Proposal";
     String Decision = "Decision";
-    String Alive = "Decision";
+    String Alive = "Alive";
 }

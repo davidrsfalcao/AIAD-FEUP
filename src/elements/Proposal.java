@@ -1,7 +1,5 @@
 package elements;
 
-import agents.PostMan;
-
 public class Proposal {
 	
 	private PostManID postman;
@@ -9,14 +7,15 @@ public class Proposal {
 	private Order order;
 	
 	public Proposal(PostManID postman, double price, Order order) {
-		this.postman= postman;
+		this.postman = postman;
 		this.price = price;
-		this.order= order;
+		this.order = order;
 	}
 	
 	public PostManID getPostManID() {
 		return postman;
 	}
+
 	public double getPrice() {
 		return price;
 	

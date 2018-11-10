@@ -19,6 +19,8 @@ public class PostOffice extends Agent {
 	private ArrayList<PostManID> postMen = new ArrayList<PostManID>();
 	private ArrayList<Order> orders = new ArrayList<Order>();
 	private long lastOrderTime = System.currentTimeMillis();
+    private ArrayList<Proposal> proposals = new ArrayList<Proposal>();
+    private Order pendingOrder;
 
     private PostOffice instance;
 
@@ -57,10 +59,9 @@ public class PostOffice extends Agent {
             }
         }
     }
-    
-    
-    public Proposal chooseProposal(ArrayList<Proposal> proposals) {
-    	double min= 0;
+
+    public Proposal chooseProposal() {
+        double min= 0;
     	Proposal pA = null;
     	for(int i=0;i < proposals.size();i++) {
     		int ind= postMen.indexOf(proposals.get(i).getPostManID());
@@ -80,6 +81,38 @@ public class PostOffice extends Agent {
     	return pA;
     }
 
+    public ArrayList<PostManID> getPostMen(){
+        return postMen;
+    }
+
+    public Order getPendingOrder() {
+        return pendingOrder;
+    }
+
+    public void setPendingOrder(Order order){
+        pendingOrder = order;
+    }
+
+    public ArrayList<Proposal> getProposals() {
+        return proposals;
+    }
+
+    public void addProposal(Proposal proposal){
+        proposals.add(proposal);
+    }
+
+    public void setProposals(ArrayList<Proposal> proposals) {
+        this.proposals = proposals;
+    }
+
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
+
     class OrderGeneratorBehaviour extends CyclicBehaviour{
 
         @Override
@@ -92,7 +125,7 @@ public class PostOffice extends Agent {
         private void generateOrder(){
             long diff = System.currentTimeMillis() - lastOrderTime;
 
-            if(diff >= 5000){
+            if(diff >= 5000 && pendingOrder == null){
                 lastOrderTime = System.currentTimeMillis();
 
                 Random rand = new Random();
