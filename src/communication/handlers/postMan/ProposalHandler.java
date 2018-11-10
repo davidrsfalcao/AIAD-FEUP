@@ -32,9 +32,6 @@ public class ProposalHandler {
         boolean pickUp = !postMan.isGoingToPostOffice();
 
 
-
-
-
         return 0.0;
     }
 

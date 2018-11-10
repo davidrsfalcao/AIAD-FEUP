@@ -43,7 +43,7 @@ public class PostMan extends Agent {
     
     public void updateGoingToPostOffice() {
     	
-    	Point p= new Point(0,0);
+    	Point p= postOfficePosition;
     	
     	if(position == p) {
     		goingToPostOffice = false;
