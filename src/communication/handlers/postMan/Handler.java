@@ -24,6 +24,9 @@ public class Handler {
                             case Handshake:
                                 return HandshakeHandler.parse(message, postMan);
 
+                            case Decision:
+                                return DecisionHandler.parse(message, postMan);
+
                         }
                     }
 

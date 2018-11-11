@@ -2,11 +2,6 @@ package tests;
 
 import elements.Point;
 import org.junit.jupiter.api.Test;
-import prolog.Client;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,11 +17,6 @@ public class TestElements {
         assertEquals(2, p1.getDistance(p2));
         assertEquals(Math.sqrt(8), p2.getDistance(p3));
 
-    }
-
-    @Test
-    public void testClient() throws IOException {
-        Client.request("[a,b,c,d]");
     }
 
 

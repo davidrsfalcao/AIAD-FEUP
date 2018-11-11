@@ -103,11 +103,14 @@ public class PostOffice extends Agent {
 
                 PostManID chosen = chooseProposal().getPostManID();
                 System.out.println("[POSTOFFICE] Order assigned to " + chosen.getName());
-                ACLMessage reply = new ProposalResponse(chosen.getId()).toACL();
+                int orderId = orders.size();
+
+                ACLMessage reply = new ProposalResponse(chosen.getId(), orderId).toACL();
 
                 if(reply != null){
                     send(reply);
-                    System.out.println("[POSTOFFICE] " + reply.getPerformative() + " - " + reply.getOntology() + " | " + chosen.getName() );
+                    System.out.println("[POSTOFFICE] " + reply.getPerformative() + " - " + reply.getOntology() + " - "
+                            + reply.getContent() + " | " + chosen.getName() );
                 }
 
 

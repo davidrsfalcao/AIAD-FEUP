@@ -104,6 +104,10 @@ public class PostMan extends Agent {
         return vehicle;
     }
 
+    public String getPostManName() {
+        return name;
+    }
+
     public void updatePostOfficePosition(Point position){
         this.postOfficePosition = position;
 
@@ -116,6 +120,10 @@ public class PostMan extends Agent {
 
     public void setPendingOrder(OrderMessage pendingOrder) {
         this.pendingOrder = pendingOrder;
+    }
+
+    public OrderMessage getPendingOrder() {
+        return pendingOrder;
     }
 
     class PostManBehaviour extends CyclicBehaviour {

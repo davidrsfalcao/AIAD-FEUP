@@ -33,9 +33,6 @@ Um outro exemplo seria um carteiro que aceitou um serviço e agora só aceitará
 
 Uma outra opção seria um carteiro que já aceitou um serviço e agora para um novo serviço na mesma zona, apresentará um preço mais baixo tornando-se mais competitivo.
 
-### Estratégia PostMan
-Ao receber uma order
-
 
 ## Comunicação
 
@@ -121,7 +118,7 @@ Enviar mensagem(exemplo):
 		receiver: PostMan;
 		ontology: Decision;
 		reply-with: null;
-		content: null
+		content: orderID
 	}
 ```
 

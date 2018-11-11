@@ -5,6 +5,7 @@ package elements;
  *
  */
 public class Order {
+	private int ID;
 	private Point destiny;
 	private int timeToDelivery;
 	private int type; /* 0 : pick up | 1 : delivery */
@@ -55,5 +56,14 @@ public class Order {
      */
     public void setType(int type) {
         this.type = type;
+    }
+
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

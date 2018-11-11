@@ -4,10 +4,8 @@ import agents.PostMan;
 import communication.messages.FullMessage;
 import communication.messages.OrderMessage;
 import communication.messages.ProposalMessage;
-import elements.Order;
 import jade.lang.acl.ACLMessage;
 
-import java.util.ArrayList;
 
 public class ProposalHandler {
 
