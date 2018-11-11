@@ -6,6 +6,7 @@ import java.util.Random;
 import communication.Header;
 import communication.handlers.postMan.Handler;
 import communication.messages.HandshakeMessage;
+import communication.messages.OrderMessage;
 import elements.Order;
 import elements.Point;
 import elements.Vehicle;
@@ -24,6 +25,7 @@ public class PostMan extends Agent {
     private Vehicle vehicle;
     private PostMan instance;
     private boolean goingToPostOffice;
+    private OrderMessage pendingOrder;
 
     public PostMan(String name, Point position, AID postOffice, int capacity){
         this.name = name;
@@ -48,11 +50,7 @@ public class PostMan extends Agent {
     	if(position == p) {
     		goingToPostOffice = false;
     		return;
-    	}
-    	
-    	if(goingToPostOffice) {
-    		goingToPostOffice = false;
-    	}else {
+    	}else if(!goingToPostOffice) {
     		goingToPostOffice = true;
     	}
     }
@@ -114,6 +112,10 @@ public class PostMan extends Agent {
 
     public void addOrder(Order order){
         orders.add(order);
+    }
+
+    public void setPendingOrder(OrderMessage pendingOrder) {
+        this.pendingOrder = pendingOrder;
     }
 
     class PostManBehaviour extends CyclicBehaviour {

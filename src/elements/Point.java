@@ -41,7 +41,11 @@ public class Point {
      * @return - distance between the two points
      */
     public double getDistance(Point other){
-        return Math.sqrt(Math.pow(other.getX()-this.x, 2) + Math.pow(other.getY()-this.y, 2));
+        return Math.sqrt(Math.pow(other.getX() - x, 2) + Math.pow(other.getY() - y, 2));
     }
 
+    @Override
+    public String toString() {
+        return "x:" + x + "  y:" + y;
+    }
 }

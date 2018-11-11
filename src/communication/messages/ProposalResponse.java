@@ -3,15 +3,22 @@ package communication.messages;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 
+import java.util.ArrayList;
+
 
 public class ProposalResponse extends Message{
 
     private int performative;
-    private AID receiver;
+    private ArrayList<AID> receivers = new ArrayList<>();
 
-    public ProposalResponse(int performative, AID receiver) {
-        this.performative = performative;
-        this.receiver = receiver;
+    public ProposalResponse(AID receiver) {
+        this.performative = ACLMessage.ACCEPT_PROPOSAL;
+        receivers.add(receiver);
+    }
+
+    public ProposalResponse(ArrayList<AID> receivers) {
+        this.performative = ACLMessage.REJECT_PROPOSAL;
+        this.receivers = receivers;
     }
 
     @Override
@@ -19,7 +26,8 @@ public class ProposalResponse extends Message{
         ACLMessage response = new ACLMessage(performative);
         response.setReplyWith(null);
         response.setOntology(Decision);
-        response.addReceiver(receiver);
+        for(AID receiver : receivers)
+            response.addReceiver(receiver);
         response.setContent(null);
         return response;
     }
