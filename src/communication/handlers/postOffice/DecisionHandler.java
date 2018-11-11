@@ -30,30 +30,7 @@ public class DecisionHandler {
             }
         }
 
-        WaitingReception waitingReception = new WaitingReception(postOffice);
-        Thread thread = new Thread(waitingReception);
-        thread.start();
-        
-        while(thread.isAlive()){/*wait*/}
-
-        ACLMessage reply = null;
-
-        	if(postManID == postOffice.chooseProposal().getPostManID()){
-        		reply = new ProposalMessage(ACLMessage.ACCEPT_PROPOSAL, aid).toACL();
-        		System.out.println("[POSTOFFICE] Order assigned to " + postManID.getName());
-        	}
-        	else {
-        		reply = new ProposalMessage(ACLMessage.REJECT_PROPOSAL,aid).toACL();
-        	}
-        
-        postOffice.resetProposals();
-
-        if(postOffice.getPendingOrder() != null){
-            postOffice.addOrder(postOffice.getPendingOrder());
-            postOffice.setPendingOrder(null);
-        }
-
-        return reply;
+        return null;
     }
 
 }
