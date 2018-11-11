@@ -64,12 +64,12 @@ public class PostOffice extends Agent {
         double min= 0;
     	Proposal pA = null;
     	for(int i=0;i < proposals.size();i++) {
-    		int ind= postMen.indexOf(proposals.get(i).getPostManID());
+    		int ind = postMen.indexOf(proposals.get(i).getPostManID());
     		if(i==0) {
-    			min = proposals.get(i).getPrice() * postMen.get(ind).getRating();
+    			min = proposals.get(i).getPrice() / postMen.get(ind).getRating();
     			pA= proposals.get(i);
     		}else {
-    			double temp = proposals.get(i).getPrice() * postMen.get(ind).getRating();
+    			double temp = proposals.get(i).getPrice() / postMen.get(ind).getRating();
     			if(temp < min) {
     				min = temp;
     				pA=proposals.get(i);

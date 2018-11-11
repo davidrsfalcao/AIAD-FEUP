@@ -33,15 +33,15 @@ public class DecisionHandler {
 
         ACLMessage reply = null;
 
-
-        if(postManID.getName() == postOffice.chooseProposal().getPostManID().getName()){
-            reply = new ProposalMessage(ACLMessage.ACCEPT_PROPOSAL, aid).toACL();
-
+        for(int n=0;n < postOffice.getPostMen().size();n++) {
+        	if(postOffice.getPostMen().get(n) == postOffice.chooseProposal().getPostManID()){
+        		reply = new ProposalMessage(ACLMessage.ACCEPT_PROPOSAL, postOffice.getPostMen().get(n).getId()).toACL();
+        	}
+        	else {
+        		reply = new ProposalMessage(ACLMessage.REJECT_PROPOSAL,postOffice.getPostMen().get(n).getId()).toACL();
+        	}
         }
-        else {
-            reply = new ProposalMessage(ACLMessage.REJECT_PROPOSAL,aid).toACL();
-        }
-
+        
         postOffice.setProposals(new ArrayList<>());
 
         if(postOffice.getPendingOrder() != null){
