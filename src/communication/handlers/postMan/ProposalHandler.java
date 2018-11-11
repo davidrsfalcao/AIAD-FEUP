@@ -20,6 +20,7 @@ public class ProposalHandler {
         ProposalHandler handler = new ProposalHandler();
 
         OrderMessage content = new OrderMessage(message);
+        postMan.setPendingOrder(content);
         
         if(postMan.getVehicle().getCurrentLoad() == postMan.getVehicle().getMaximumLoad()) {
         	System.out.println(postMan.getName() + "is already full!");
@@ -30,24 +31,5 @@ public class ProposalHandler {
         }
         
     }
-
-    public double handlerOrder(OrderMessage message, PostMan postMan){
-
-        ArrayList<Order> orders = (ArrayList<Order>) postMan.getOrders().clone();
-        boolean pickUp = !postMan.isGoingToPostOffice();
-
-
-        return 0.0;
-    }
-
-    private double calculatePrice(PostMan postMan){
-
-        return 0.0;
-    }
-
-    private double calculateBestPrice(PostMan postMan){
-
-        return 0.0;
-    }
-
+    
 }
