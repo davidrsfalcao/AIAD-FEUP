@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import communication.messages.OrderMessage;
-import communication.messages.ProposalMessage;
 import communication.messages.ProposalResponse;
 import elements.Order;
 import elements.Point;
@@ -19,10 +18,10 @@ import jade.lang.acl.ACLMessage;
 public class PostOffice extends Agent {
 
     private Point position;
-	private ArrayList<PostManID> postMen = new ArrayList<PostManID>();
-	private ArrayList<Order> orders = new ArrayList<Order>();
+	private ArrayList<PostManID> postMen = new ArrayList<>();
+	private ArrayList<Order> orders = new ArrayList<>();
 	private long lastOrderTime = System.currentTimeMillis();
-    private ArrayList<Proposal> proposals = new ArrayList<Proposal>();
+    private ArrayList<Proposal> proposals = new ArrayList<>();
     private Order pendingOrder;
 
     private PostOffice instance;
@@ -128,6 +127,7 @@ public class PostOffice extends Agent {
                 }
 
                 resetProposals();
+                orders.add(pendingOrder);
                 pendingOrder = null;
 
             }
