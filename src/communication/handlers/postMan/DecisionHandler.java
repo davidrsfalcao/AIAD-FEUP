@@ -2,6 +2,7 @@ package communication.handlers.postMan;
 
 import agents.PostMan;
 import communication.messages.ProposalResponse;
+import elements.Destiny;
 import elements.Order;
 import jade.lang.acl.ACLMessage;
 
@@ -19,10 +20,15 @@ public class DecisionHandler {
             Order order = new Order(postMan.getPendingOrder().getPosition(), postMan.getPendingOrder().getEstimatedTime());
             order.setID(orderId);
 
-            System.out.println("[POSTMAN " + postMan.getPostManName() + " ] Added order with ID:" +  orderId);
+            System.out.println("[POSTMAN " + postMan.getPostManName() + "] Added order with ID:" +  orderId);
 
             postMan.addOrder(order);
             postMan.setPendingOrder(null);
+
+            if(postMan.getDestiny() == null){
+                postMan.addDestinyPostOffice();
+            }
+
         }
 
         return null;

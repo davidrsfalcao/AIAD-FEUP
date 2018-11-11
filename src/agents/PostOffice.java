@@ -4,6 +4,7 @@ import communication.handlers.postOffice.Handler;
 import java.util.ArrayList;
 import java.util.Random;
 
+import communication.messages.AliveMessage;
 import communication.messages.OrderMessage;
 import communication.messages.ProposalResponse;
 import elements.Order;
@@ -23,6 +24,7 @@ public class PostOffice extends Agent {
 	private long lastOrderTime = System.currentTimeMillis();
     private ArrayList<Proposal> proposals = new ArrayList<>();
     private Order pendingOrder;
+    private long lastUpdate = System.currentTimeMillis();
 
     private PostOffice instance;
 
@@ -35,6 +37,7 @@ public class PostOffice extends Agent {
         addBehaviour(new PostOfficeBehaviour());
         addBehaviour(new OrderGeneratorBehaviour());
         addBehaviour(new ProposalSelectionBehaviour());
+        addBehaviour(new UpdateBehaviour());
     }
 
     public void addPostman(PostManID postManID){
@@ -137,6 +140,19 @@ public class PostOffice extends Agent {
         }
     }
 
+    class UpdateBehaviour extends CyclicBehaviour{
+        @Override
+        public void action() {
+            long diff = System.currentTimeMillis() - lastUpdate;
+
+            if(diff >= 1000){
+                send(new AliveMessage(postMen, diff).toACL());
+                lastUpdate = System.currentTimeMillis();
+            }
+
+        }
+    }
+
     public Proposal chooseProposal() {
 
         double min= 0;
@@ -166,10 +182,6 @@ public class PostOffice extends Agent {
         return pendingOrder;
     }
 
-    public void setPendingOrder(Order order){
-        pendingOrder = order;
-    }
-
     public ArrayList<Proposal> getProposals() {
         return proposals;
     }
@@ -182,13 +194,8 @@ public class PostOffice extends Agent {
         this.proposals.clear();
     }
 
-    public ArrayList<Order> getOrders() {
-        return orders;
-    }
 
-    public void addOrder(Order order) {
-        orders.add(order);
-    }
+
 
 
 }

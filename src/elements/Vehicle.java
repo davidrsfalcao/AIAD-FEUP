@@ -1,6 +1,7 @@
 package elements;
 
 import static utils.Constants.electricityPrice;
+import static utils.Constants.vehicleVelocity;
 
 /**
  * Class that represents a vehicle
@@ -48,6 +49,21 @@ public class Vehicle {
      */
     public int getCurrentLoad() {
     	return currentLoad;
+    }
+
+    public double getTravelTime(Point pos1, Point pos2){
+
+        double distance = pos1.getDistance(pos2);
+
+        return distance/vehicleVelocity;
+    }
+
+    public void addOrder(){
+        currentLoad++;
+    }
+
+    public void removeOrder(){
+        currentLoad--;
     }
 
 }

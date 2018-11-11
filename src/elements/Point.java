@@ -1,5 +1,7 @@
 package elements;
 
+import java.util.Objects;
+
 /**
  * Class that represents a point in 2D
  */
@@ -44,8 +46,14 @@ public class Point {
         return Math.sqrt(Math.pow(other.getX() - x, 2) + Math.pow(other.getY() - y, 2));
     }
 
+    public void set(double x, double y){
+        this.x = x;
+        this.y = y;
+    }
+
     @Override
     public String toString() {
         return "x:" + x + "  y:" + y;
     }
+
 }

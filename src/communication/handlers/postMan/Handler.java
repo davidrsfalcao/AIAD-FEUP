@@ -16,7 +16,7 @@ public class Handler {
                     return ProposalHandler.parse(message, postMan);
 
                 case Alive:
-                    return  AliveHandler.parse(message);
+                    return  AliveHandler.parse(message, postMan);
 
                 case Null:
                     if(message.getOntology() != null){

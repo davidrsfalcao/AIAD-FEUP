@@ -9,9 +9,19 @@ import java.util.ArrayList;
 
 public class AliveMessage extends Message {
     private ArrayList<PostManID> receivers;
+    private double delta;
 
-    public AliveMessage(ArrayList<PostManID> receivers) {
+    public AliveMessage(ArrayList<PostManID> receivers, double delta) {
         this.receivers = receivers;
+        this.delta = delta;
+    }
+
+    public AliveMessage(ACLMessage message){
+        delta = Double.parseDouble(message.getContent());
+    }
+
+    public double getDelta() {
+        return delta;
     }
 
     @Override
@@ -22,6 +32,7 @@ public class AliveMessage extends Message {
         }
         msg.setOntology(Header.Alive);
         msg.setReplyWith(Header.Alive);
+        msg.setContent(delta + "");
         return msg;
     }
 }

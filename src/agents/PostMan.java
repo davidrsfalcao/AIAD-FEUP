@@ -7,6 +7,7 @@ import communication.Header;
 import communication.handlers.postMan.Handler;
 import communication.messages.HandshakeMessage;
 import communication.messages.OrderMessage;
+import elements.Destiny;
 import elements.Order;
 import elements.Point;
 import elements.Vehicle;
@@ -14,6 +15,9 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
+import utils.Utils;
+
+import static communication.Header.Alive;
 
 
 public class PostMan extends Agent {
@@ -26,6 +30,7 @@ public class PostMan extends Agent {
     private PostMan instance;
     private boolean goingToPostOffice;
     private OrderMessage pendingOrder;
+    private Destiny destiny;
 
     public PostMan(String name, Point position, AID postOffice, int capacity){
         this.name = name;
@@ -38,7 +43,81 @@ public class PostMan extends Agent {
         goingToPostOffice = false;
 
     }
-    
+
+    public void update(double delta){
+
+        if(destiny != null){
+            destiny.update(delta);
+
+            if(destiny.getPosition().equals(postOfficePosition))
+                goingToPostOffice = true;
+
+
+            if(destiny.getTime() < 0){
+                if(destiny.getPosition().equals(postOfficePosition)){
+                    for(int k =0; k < orders.size(); k++){
+                        if(vehicle.getCurrentLoad() == vehicle.getMaximumLoad())
+                            break;
+                        else if(orders.get(k).getType() == 0){
+                            orders.get(k).setType(1);
+                            vehicle.addOrder();
+                        }
+                    }
+                    goingToPostOffice = false;
+                }
+                else {
+                    int i;
+                    for(i = 0; i < orders.size(); i++ ){
+                        if(orders.get(i).getDestiny().equals(destiny.getPosition()))
+                            break;
+                    }
+
+                    Order order = orders.get(i);
+
+                    if(order.getType() == 1){
+
+                        vehicle.removeOrder();
+                        // finish order
+
+                    }
+                }
+
+
+                if(orders.size() == 0){
+                    position = destiny.getPosition();
+                    destiny = null;
+
+                }
+                else{
+                    double dd = Math.abs(destiny.getTime());
+
+                    Utils.sortOrders(this);
+                    if(orders.get(0).getType() == 1){
+                        Point des = orders.get(0).getDestiny();
+                        Point pos = destiny.getPosition();
+                        destiny = new Destiny(des,pos,vehicle.getTravelTime(des,pos));
+
+                    }
+                    else {
+                         Point pos = destiny.getPosition();
+                         destiny = new Destiny(postOfficePosition,pos,vehicle.getTravelTime(postOfficePosition,pos));
+                    }
+                    destiny.update(dd);
+                }
+            }
+
+            if(destiny != null){
+                double per = 1 - destiny.getTime()/destiny.getTotalTime();
+                double x = destiny.getPosition().getX() - (destiny.getDeltaX()*per);
+                double y = destiny.getPosition().getX() - (destiny.getDeltaX()*per);
+
+                position.set(x,y);
+
+            }
+
+        }
+    }
+
     public boolean isGoingToPostOffice() {
     	return goingToPostOffice;
     }
@@ -104,14 +183,28 @@ public class PostMan extends Agent {
         return vehicle;
     }
 
+    public void addDestinyPostOffice(){
+        destiny = new Destiny(postOfficePosition, position ,vehicle.getTravelTime(postOfficePosition,position));
+        goingToPostOffice = true;
+    }
+
+    public Destiny getDestiny() {
+        return destiny;
+    }
+
+    public void setDestiny(Destiny destiny) {
+        this.destiny = destiny;
+    }
+
     public String getPostManName() {
         return name;
     }
 
     public void updatePostOfficePosition(Point position){
-        this.postOfficePosition = position;
+        postOfficePosition = position;
 
         System.out.println(" --- " + name + " updated PostOffice Position to " + postOfficePosition + " ---");
+
     }
 
     public void addOrder(Order order){
@@ -140,7 +233,8 @@ public class PostMan extends Agent {
 
                     if(reply != null){
                         send(reply);
-                        System.out.println("[POSTMAN " + name + " ] " + reply.getPerformative() + " - " + reply.getOntology() + " - " + reply.getContent());
+                        if(reply.getOntology() != Alive )
+                            System.out.println("[POSTMAN " + name + "] " + reply.getPerformative() + " - " + reply.getOntology() + " - " + reply.getContent());
                     }
                   
                 } else {

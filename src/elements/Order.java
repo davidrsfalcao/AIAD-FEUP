@@ -8,7 +8,7 @@ public class Order {
 	private int ID;
 	private Point destiny;
 	private int timeToDelivery;
-	private int type; /* 0 : pick up | 1 : delivery */
+	private int type; /* 0 : pick up | 1 : delivery | 2 : delivered*/
 
     /**
      * Order constructor
