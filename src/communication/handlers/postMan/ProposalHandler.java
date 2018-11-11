@@ -21,7 +21,7 @@ public class ProposalHandler {
 
         OrderMessage content = new OrderMessage(message);
         postMan.setPendingOrder(content);
-        
+
         if(postMan.getVehicle().getCurrentLoad() == postMan.getVehicle().getMaximumLoad()) {
         	System.out.println(postMan.getName() + "is already full!");
         	return new FullMessage(message.getSender()).toACL();
@@ -29,7 +29,7 @@ public class ProposalHandler {
         	double price = postMan.costCalculator(content.getPosition());
         	return new ProposalMessage(price, message.getSender()).toACL();
         }
-        
+
     }
-    
+
 }
