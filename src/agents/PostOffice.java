@@ -64,59 +64,6 @@ public class PostOffice extends Agent {
         }
     }
 
-    public Proposal chooseProposal() {
-        double min= 0;
-    	Proposal pA = null;
-    	for(int i=0;i < proposals.size();i++) {
-    		int ind= postMen.indexOf(proposals.get(i).getPostManID());
-    		if(i==0) {
-    			min = proposals.get(i).getPrice() * postMen.get(ind).getRating();
-    			pA= proposals.get(i);
-    		}else {
-    			double temp = proposals.get(i).getPrice() * postMen.get(ind).getRating();
-    			if(temp < min) {
-    				min = temp;
-    				pA=proposals.get(i);
-    			}
-    		}
-
-    	}
-
-    	return pA;
-    }
-
-    public ArrayList<PostManID> getPostMen(){
-        return postMen;
-    }
-
-    public Order getPendingOrder() {
-        return pendingOrder;
-    }
-
-    public void setPendingOrder(Order order){
-        pendingOrder = order;
-    }
-
-    public ArrayList<Proposal> getProposals() {
-        return proposals;
-    }
-
-    public void addProposal(Proposal proposal){
-        proposals.add(proposal);
-    }
-
-    public void setProposals(ArrayList<Proposal> proposals) {
-        this.proposals = proposals;
-    }
-
-    public ArrayList<Order> getOrders() {
-        return orders;
-    }
-
-    public void addOrder(Order order) {
-        orders.add(order);
-    }
-
     class OrderGeneratorBehaviour extends CyclicBehaviour{
 
         @Override
