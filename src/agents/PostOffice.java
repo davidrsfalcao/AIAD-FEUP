@@ -78,7 +78,6 @@ public class PostOffice extends Agent {
     		}
     		
     	}
-    	System.out.println(pA.getPrice());
     	return pA;
     }
 
