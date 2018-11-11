@@ -20,9 +20,13 @@ public class DecisionHandler {
 
         for(int i=0; i < postOffice.getPostMen().size(); i++){
             if(postOffice.getPostMen().get(i).getId().getLocalName().equals(aid.getLocalName())){
+            	if(message.getOntology() == "Full") {
+            		continue;
+            	}else {
                 postManID = postOffice.getPostMen().get(i);
                 ProposalMessage props = new ProposalMessage(message);
                 postOffice.addProposal(new Proposal(postManID,props.getCost(),postOffice.getPendingOrder()));
+            	}
             }
         }
 
