@@ -19,7 +19,7 @@ public class PostManID {
 	public PostManID(AID id) {
 		name = id.getLocalName();
 		this.id = id;
-		rating = 0;
+		rating = 1;
 		nrDeliveries = 0;
 	}
 

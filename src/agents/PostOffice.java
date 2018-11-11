@@ -63,6 +63,7 @@ public class PostOffice extends Agent {
     public Proposal chooseProposal() {
         double min= 0;
     	Proposal pA = null;
+    	System.out.println(proposals.size());
     	for(int i=0;i < proposals.size();i++) {
     		int ind = postMen.indexOf(proposals.get(i).getPostManID());
     		if(i==0) {
@@ -77,7 +78,7 @@ public class PostOffice extends Agent {
     		}
     		
     	}
-    	
+    	System.out.println(pA.getPrice());
     	return pA;
     }
 
@@ -103,6 +104,10 @@ public class PostOffice extends Agent {
 
     public void setProposals(ArrayList<Proposal> proposals) {
         this.proposals = proposals;
+    }
+    
+    public void resetProposals() {
+        this.proposals.clear();
     }
 
     public ArrayList<Order> getOrders() {

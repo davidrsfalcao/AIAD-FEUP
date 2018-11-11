@@ -2,6 +2,7 @@ package communication.handlers.postOffice;
 
 import agents.PostOffice;
 import communication.messages.ProposalMessage;
+import elements.Point;
 import elements.PostManID;
 import elements.Proposal;
 import jade.core.AID;
@@ -28,21 +29,20 @@ public class DecisionHandler {
         WaitingReception waitingReception = new WaitingReception(postOffice);
         Thread thread = new Thread(waitingReception);
         thread.start();
-
+        
         while(thread.isAlive()){/*wait*/}
 
         ACLMessage reply = null;
 
-        for(int n=0;n < postOffice.getPostMen().size();n++) {
-        	if(postOffice.getPostMen().get(n) == postOffice.chooseProposal().getPostManID()){
-        		reply = new ProposalMessage(ACLMessage.ACCEPT_PROPOSAL, postOffice.getPostMen().get(n).getId()).toACL();
+        	if(postManID == postOffice.chooseProposal().getPostManID()){
+        		reply = new ProposalMessage(ACLMessage.ACCEPT_PROPOSAL, aid).toACL();
+        		System.out.println("[POSTOFFICE] Order assigned to " + postManID.getName());
         	}
         	else {
-        		reply = new ProposalMessage(ACLMessage.REJECT_PROPOSAL,postOffice.getPostMen().get(n).getId()).toACL();
+        		reply = new ProposalMessage(ACLMessage.REJECT_PROPOSAL,aid).toACL();
         	}
-        }
         
-        postOffice.setProposals(new ArrayList<>());
+        postOffice.resetProposals();
 
         if(postOffice.getPendingOrder() != null){
             postOffice.addOrder(postOffice.getPendingOrder());

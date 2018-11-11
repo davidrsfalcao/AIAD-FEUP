@@ -48,11 +48,7 @@ public class PostMan extends Agent {
     	if(position == p) {
     		goingToPostOffice = false;
     		return;
-    	}
-    	
-    	if(goingToPostOffice) {
-    		goingToPostOffice = false;
-    	}else {
+    	}else if(!goingToPostOffice) {
     		goingToPostOffice = true;
     	}
     }
