@@ -55,7 +55,7 @@ public class PostManID {
      *
      * @param rating - the rating of the finished order
      */
-	public void finishDelivery(double rating) {
+	public void finishDelivery(int rating) {
 		double num = this.rating * nrDeliveries;
 		nrDeliveries++;
 

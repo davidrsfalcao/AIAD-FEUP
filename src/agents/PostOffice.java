@@ -44,6 +44,16 @@ public class PostOffice extends Agent {
         postMen.add(postManID);
         System.out.println(" --- POSTOFFICE ADDED "+ postManID.getName()  +" ---");
     }
+    
+    public Order getOrderByID(int orderID){
+    	for(int i=0;i < orders.size();i++) {
+    		if(orders.get(i).getID() == orderID) {
+    			return orders.get(i);
+    		}
+    	}
+		return null;
+    }
+    
 
     public Point getPosition() {
         return position;
@@ -91,6 +101,7 @@ public class PostOffice extends Agent {
                     System.out.println("\n\n[POSTOFFICE] " + message.getPerformative() + " - " + message.getOntology() + " - " + message.getContent());
                     send(message);
                     pendingOrder = new Order(new Point(x, y),i*12);
+                    pendingOrder.setTimeCreation(System.currentTimeMillis());
                 }
 
             }
@@ -192,6 +203,23 @@ public class PostOffice extends Agent {
 
     public void resetProposals() {
         this.proposals.clear();
+    }
+    
+    public void setOrderDelivered(int orderID) {
+    	for(int i=0; i < orders.size();i++) {
+    		if(orders.get(i).getID() == orderID) {
+    			orders.get(i).setType(2);
+    		}
+    	}
+    }
+    
+    public PostManID getPostManByAID(AID id) {
+    	for(int i=0; i < postMen.size();i++) {
+    		if(postMen.get(i).getId() == id) {
+    			return postMen.get(i);
+    		}
+    	}
+    	return null;
     }
 
 

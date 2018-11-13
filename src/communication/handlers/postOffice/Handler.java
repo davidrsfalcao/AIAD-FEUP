@@ -21,6 +21,9 @@ public class Handler {
                 case Decision:
                     return DecisionHandler.parse(message, postOffice);
 
+                case Delivered:
+                	return DeliveryDoneHandler.parse(message,postOffice);
+                    
                 case Null:
                     String ontology = (message.getOntology() != null) ? message.getOntology() : Null;
                     switch (ontology){

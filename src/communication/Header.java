@@ -12,4 +12,5 @@ public interface Header {
     String Proposal = "Proposal";
     String Decision = "Decision";
     String Alive = "Alive";
+    String Delivered = "Delivered";
 }

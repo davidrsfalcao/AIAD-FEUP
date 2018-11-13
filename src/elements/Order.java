@@ -9,6 +9,7 @@ public class Order {
 	private Point destiny;
 	private int timeToDelivery;
 	private int type; /* 0 : pick up | 1 : delivery | 2 : delivered*/
+	private long timeCreation;
 
     /**
      * Order constructor
@@ -66,4 +67,13 @@ public class Order {
     public void setID(int ID) {
         this.ID = ID;
     }
+    
+    public long getCreationTime() {
+    	return this.timeCreation;
+    }
+    
+    public void setTimeCreation(long TimeCreation) {
+    	this.timeCreation = TimeCreation;
+    }
+    
 }
