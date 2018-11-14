@@ -1,6 +1,7 @@
 package elements;
 
 import static utils.Constants.electricityPrice;
+import static utils.Constants.ratioTime;
 import static utils.Constants.vehicleVelocity;
 
 /**
@@ -54,8 +55,10 @@ public class Vehicle {
     public double getTravelTime(Point pos1, Point pos2){
 
         double distance = pos1.getDistance(pos2);
+        double timeH = distance/vehicleVelocity;
 
-        return distance/vehicleVelocity;
+        double timeS = timeH * ratioTime;
+        return timeS * 1000;
     }
 
     public void addOrder(){

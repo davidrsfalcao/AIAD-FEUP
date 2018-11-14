@@ -5,6 +5,7 @@ import java.util.Random;
 
 import communication.Header;
 import communication.handlers.postMan.Handler;
+import communication.messages.DeliveryDoneMessage;
 import communication.messages.HandshakeMessage;
 import communication.messages.OrderMessage;
 import elements.Destiny;
@@ -46,6 +47,15 @@ public class PostMan extends Agent {
 
     public void update(double delta){
 
+        String dest;
+        if(destiny != null){
+           dest = destiny.getPosition() + "";
+        }
+        else dest = position + "";
+
+        System.out.println(" ---  " + name + "  on  " + position + " -> "+ dest + "   load:" + orders.size());
+
+
         if(destiny != null){
             destiny.update(delta);
 
@@ -55,6 +65,7 @@ public class PostMan extends Agent {
 
             if(destiny.getTime() < 0){
                 if(destiny.getPosition().equals(postOfficePosition)){
+                    System.out.println(name + " in the PostOffice");
                     for(int k =0; k < orders.size(); k++){
                         if(vehicle.getCurrentLoad() == vehicle.getMaximumLoad())
                             break;
@@ -63,6 +74,7 @@ public class PostMan extends Agent {
                             vehicle.addOrder();
                         }
                     }
+                    position = new Point(postOfficePosition.getX(), postOfficePosition.getY());
                     goingToPostOffice = false;
                 }
                 else {
@@ -77,14 +89,18 @@ public class PostMan extends Agent {
                     if(order.getType() == 1){
 
                         vehicle.removeOrder();
-                        // finish order
+                        orders.remove(order);
 
+                        ACLMessage reply = new DeliveryDoneMessage(postOffice, order.getID()).toACL();
+                        System.out.println("[POSTMAN " + name + "] " + reply.getPerformative() + " - " + reply.getOntology() + " - " + reply.getContent());
+                        if(reply != null){
+                            send(reply);
+                        }
                     }
                 }
 
-
                 if(orders.size() == 0){
-                    position = destiny.getPosition();
+                    position = new Point(destiny.getPosition().getX(), destiny.getPosition().getY());
                     destiny = null;
 
                 }
@@ -99,7 +115,7 @@ public class PostMan extends Agent {
 
                     }
                     else {
-                         Point pos = destiny.getPosition();
+                         Point pos = new Point( destiny.getPosition().getX(), destiny.getPosition().getY());
                          destiny = new Destiny(postOfficePosition,pos,vehicle.getTravelTime(postOfficePosition,pos));
                     }
                     destiny.update(dd);
@@ -108,8 +124,8 @@ public class PostMan extends Agent {
 
             if(destiny != null){
                 double per = 1 - destiny.getTime()/destiny.getTotalTime();
-                double x = destiny.getPosition().getX() - (destiny.getDeltaX()*per);
-                double y = destiny.getPosition().getX() - (destiny.getDeltaX()*per);
+                double x = destiny.getInitialPosition().getX() + (destiny.getDeltaX()*per);
+                double y = destiny.getInitialPosition().getY() + (destiny.getDeltaY()*per);
 
                 position.set(x,y);
 
@@ -118,22 +134,6 @@ public class PostMan extends Agent {
         }
     }
 
-    public boolean isGoingToPostOffice() {
-    	return goingToPostOffice;
-    }
-    
-    public void updateGoingToPostOffice() {
-    	
-    	Point p= postOfficePosition;
-    	
-    	if(position == p) {
-    		goingToPostOffice = false;
-    		return;
-    	}else if(!goingToPostOffice) {
-    		goingToPostOffice = true;
-    	}
-    }
-    
     public double costCalculator(Point orderPos) {
     	
     	if(goingToPostOffice){
@@ -150,16 +150,16 @@ public class PostMan extends Agent {
     		}else {
     			dist = orders.get(index).getDestiny().getDistance(orderPos); //distance between closest Position and New Order
     		}
-    		if(((vehicle.getCurrentLoad()/vehicle.getMaximumLoad())*100) >= 80) { // Since the car is almost full,the postman will charge more
-    			return vehicle.getTravelPrice(dist)*1.5;
+    		if(((orders.size()/vehicle.getMaximumLoad())*100) >= 80) { // Since the car is almost full,the postman will charge more
+    			return vehicle.getTravelPrice(dist)*2;
     		}else {
     			return vehicle.getTravelPrice(dist);
     		}
     	}else {
     		double dist1 = position.getDistance(postOfficePosition);
     		double dist2 = postOfficePosition.getDistance(orderPos);
-    		if(((vehicle.getCurrentLoad()/vehicle.getMaximumLoad())*100) >= 80) { // Since the car is almost full,the postman will charge more
-    			return (vehicle.getTravelPrice(dist1) + vehicle.getTravelPrice(dist2))*1.5;
+    		if(((orders.size()/vehicle.getMaximumLoad())*100) >= 80) { // Since the car is almost full,the postman will charge more
+    			return (vehicle.getTravelPrice(dist1) + vehicle.getTravelPrice(dist2))*2;
     		}else {
     			return vehicle.getTravelPrice(dist1) + vehicle.getTravelPrice(dist2);
     		}
@@ -184,7 +184,7 @@ public class PostMan extends Agent {
     }
 
     public void addDestinyPostOffice(){
-        destiny = new Destiny(postOfficePosition, position ,vehicle.getTravelTime(postOfficePosition,position));
+        destiny = new Destiny(postOfficePosition, new Point(position.getX(), position.getY()) ,vehicle.getTravelTime(postOfficePosition,position));
         goingToPostOffice = true;
     }
 
