@@ -32,8 +32,9 @@ public class PostMan extends Agent {
     private boolean goingToPostOffice;
     private OrderMessage pendingOrder;
     private Destiny destiny;
+    private double personalGain;
 
-    public PostMan(String name, Point position, AID postOffice, int capacity){
+    public PostMan(String name, Point position, AID postOffice, int capacity, double personalGain){
         this.name = name;
         this.position = position;
         this.postOffice = postOffice;
@@ -42,6 +43,7 @@ public class PostMan extends Agent {
         vehicle = new Vehicle(capacity,consumption);
         instance = this;
         goingToPostOffice = false;
+        this.personalGain=personalGain;
 
     }
 
@@ -151,17 +153,17 @@ public class PostMan extends Agent {
     			dist = orders.get(index).getDestiny().getDistance(orderPos); //distance between closest Position and New Order
     		}
     		if(((orders.size()/vehicle.getMaximumLoad())*100) >= 80) { // Since the car is almost full,the postman will charge more
-    			return vehicle.getTravelPrice(dist)*2;
+    			return vehicle.getTravelPrice(dist) * personalGain * 2;
     		}else {
-    			return vehicle.getTravelPrice(dist);
+    			return vehicle.getTravelPrice(dist) * personalGain;
     		}
     	}else {
     		double dist1 = position.getDistance(postOfficePosition);
     		double dist2 = postOfficePosition.getDistance(orderPos);
     		if(((orders.size()/vehicle.getMaximumLoad())*100) >= 80) { // Since the car is almost full,the postman will charge more
-    			return (vehicle.getTravelPrice(dist1) + vehicle.getTravelPrice(dist2))*2;
+    			return (vehicle.getTravelPrice(dist1) + vehicle.getTravelPrice(dist2)) * personalGain * 2;
     		}else {
-    			return vehicle.getTravelPrice(dist1) + vehicle.getTravelPrice(dist2);
+    			return (vehicle.getTravelPrice(dist1) + vehicle.getTravelPrice(dist2)) * personalGain;
     		}
     	}
     	
@@ -173,6 +175,10 @@ public class PostMan extends Agent {
 
     public ArrayList<Order> getOrders() {
         return orders;
+    }
+    
+    public double getPersonalGain() {
+    	return this.personalGain;
     }
 
     public Point getPosition() {

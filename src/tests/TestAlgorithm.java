@@ -40,7 +40,7 @@ public class TestAlgorithm {
 
     @Test
     public void testBestPrice(){
-        PostMan postMan = new PostMan("david", new Point(5,0), null, 10);
+        PostMan postMan = new PostMan("david", new Point(5,0), null, 10,1.4);
 
         Order order = new Order(new Point(1,0),24);
 
