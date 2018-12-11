@@ -93,12 +93,12 @@ public class PostOffice extends Agent {
         private void generateOrder(){
             long diff = System.currentTimeMillis() - lastOrderTime;
 
-            if(diff >= 5000 && pendingOrder == null){
+            if(diff >= 2000 && pendingOrder == null){
                 lastOrderTime = System.currentTimeMillis();
 
                 Random rand = new Random();
-                double x =  (double)Math.round(-25 + (25 + 25) * rand.nextDouble() * 1000d) / 1000d;
-                double y = (double)Math.round(-25 + (25 + 25) * rand.nextDouble() * 1000d) / 1000d;
+                double x =  (double)Math.round(-10 + (10 + 10) * rand.nextDouble() * 1000d) / 1000d;
+                double y = (double)Math.round(-10 + (10 + 10) * rand.nextDouble() * 1000d) / 1000d;
                 int i = rand.nextInt(8) + 1;
 
                 ACLMessage message = new OrderMessage(new Point(x, y),i*12,postMen).toACL();
@@ -168,7 +168,7 @@ public class PostOffice extends Agent {
         public void action() {
             long diff = System.currentTimeMillis() - lastUpdate;
 
-            if(diff >= 1000){
+            if(diff >= 100){
                 send(new AliveMessage(postMen, diff).toACL());
                 lastUpdate = System.currentTimeMillis();
             }

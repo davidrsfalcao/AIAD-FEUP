@@ -13,7 +13,7 @@ public interface Constants {
     double electricityPrice = 0.0002; // for Wh
 
     int vehicleVelocity = 60; //km/h
-    double ratioTime = 3600/10; // 1h --- 10s
+    double ratioTime = 3600/100;
 
     String db_path = "src" + File.separator + "database" + File.separator + "database.db";
 

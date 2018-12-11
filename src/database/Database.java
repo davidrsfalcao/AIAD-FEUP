@@ -92,8 +92,6 @@ public class Database {
         String maxId = rs.getString("maxId");
         rs.close();
 
-        System.out.println("maxID: " + maxId + ":");
-
         if(maxId == null){
             return 0;
         }

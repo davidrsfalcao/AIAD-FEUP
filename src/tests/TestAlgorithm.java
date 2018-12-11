@@ -54,6 +54,43 @@ public class TestAlgorithm {
         System.out.println(orders);
 
         //postMan.addOrder(order);
+    }
+
+
+    @Test
+    public void testSortOrders2(){
+        PostMan postMan = new PostMan("david", new Point(0,0), null, 10,1.4);
+
+        Point p1= new Point(10,10);
+        Point p2 = new Point(2,2);
+        Point p3 = new Point(10,11);
+        Order o1 = new Order(p1,10);
+        Order o2 = new Order(p2,20);
+        Order o3 = new Order(p3,30);
+        Order o4 = new Order(p1,10);
+        Order o5 = new Order(p2,20);
+        Order o6 = new Order(p3,30);
+        o4.setType(1);
+        o5.setType(1);
+        o6.setType(1);
+        ArrayList<Order> orders = new ArrayList<>();
+
+        orders.add(o1);
+        orders.add(o2);
+        orders.add(o3);
+        orders.add(o4);
+        orders.add(o5);
+        orders.add(o6);
+
+        postMan.setOrders(orders);
+        Utils.sortOrders(postMan);
+
+        assertEquals(o5, postMan.getOrders().get(0));
+        assertEquals(o4, postMan.getOrders().get(1));
+        assertEquals(o6, postMan.getOrders().get(2));
+        assertEquals(o2, postMan.getOrders().get(3));
+        assertEquals(o1, postMan.getOrders().get(4));
+        assertEquals(o3, postMan.getOrders().get(5));
 
     }
 }

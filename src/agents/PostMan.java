@@ -65,7 +65,7 @@ public class PostMan extends Agent {
         }
         else dest = position + "";
 
-        System.out.println(" ---  " + name + "  on  " + position + " -> "+ dest + "   load:" + orders.size());
+        System.out.println(" ---  " + name + "  on  " + position + " -> "+ dest + "   active orders:" + orders.size() + "    load:" + vehicle.getCurrentLoad());
 
 
         if(destiny != null){
@@ -86,6 +86,7 @@ public class PostMan extends Agent {
                             vehicle.addOrder();
                         }
                     }
+                    Utils.sortOrders(this);
                     position = new Point(postOfficePosition.getX(), postOfficePosition.getY());
                     goingToPostOffice = false;
                 }
@@ -119,12 +120,10 @@ public class PostMan extends Agent {
                 else{
                     double dd = Math.abs(destiny.getTime());
 
-                    Utils.sortOrders(this);
                     if(orders.get(0).getType() == 1){
                         Point des = orders.get(0).getDestiny();
                         Point pos = destiny.getPosition();
                         destiny = new Destiny(des,pos,vehicle.getTravelTime(des,pos));
-
                     }
                     else {
                          Point pos = new Point( destiny.getPosition().getX(), destiny.getPosition().getY());
@@ -186,7 +185,11 @@ public class PostMan extends Agent {
     public ArrayList<Order> getOrders() {
         return orders;
     }
-    
+
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+    }
+
     public double getPersonalGain() {
     	return this.personalGain;
     }

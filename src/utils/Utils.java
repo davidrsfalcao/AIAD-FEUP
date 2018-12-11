@@ -16,7 +16,43 @@ public class Utils {
      * @param postMan - Postman who will have the ordered orders
      */
     public static void sortOrders(PostMan postMan){
-        sortOrders(postMan.getOrders(), postMan.getPosition(), 0, postMan.getOrders().size());
+        sortOrdersByType(postMan);
+    }
+
+    public static void sortOrdersByType(PostMan postMan){
+        ArrayList<Order> orders = (ArrayList<Order>) postMan.getOrders().clone();
+        ArrayList<Order> orders1 = new ArrayList<>();
+        ArrayList<Order> orders2 = new ArrayList<>();
+
+        for(Order order : orders){
+            if(order.getType() == 1){
+                orders1.add(order);
+            }
+        }
+
+        if(orders1.size() > 1){
+            sortOrders(orders1, postMan.getPosition(), 0, orders1.size());
+        }
+
+        for(Order order : orders){
+            if(order.getType() != 1){
+                orders2.add(order);
+            }
+        }
+
+        if(orders2.size() > 1){
+            sortOrders(orders2, postMan.getPosition(), 0, orders2.size());
+        }
+
+        ArrayList<Order> res = new ArrayList<>();
+
+        for(Order order : orders1)
+            res.add(order);
+
+        for(Order order : orders2)
+            res.add(order);
+
+        postMan.setOrders(res);
     }
 
     /**

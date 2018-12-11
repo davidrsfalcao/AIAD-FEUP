@@ -17,8 +17,6 @@ public class ProposalHandler {
 
     static ACLMessage parse(ACLMessage message, PostMan postMan) {
 
-        ProposalHandler handler = new ProposalHandler();
-
         postMan.setNrOrder(postMan.getNrOrder() + 1);
         OrderMessage content = new OrderMessage(message);
         postMan.setPendingOrder(content);
