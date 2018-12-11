@@ -1,5 +1,6 @@
 package agents;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,6 +9,7 @@ import communication.handlers.postMan.Handler;
 import communication.messages.DeliveryDoneMessage;
 import communication.messages.HandshakeMessage;
 import communication.messages.OrderMessage;
+import database.Database;
 import elements.Destiny;
 import elements.Order;
 import elements.Point;
@@ -33,6 +35,8 @@ public class PostMan extends Agent {
     private OrderMessage pendingOrder;
     private Destiny destiny;
     private double personalGain;
+    private int nrOrder;
+    private int id;
 
     public PostMan(String name, Point position, AID postOffice, int capacity, double personalGain){
         this.name = name;
@@ -44,6 +48,12 @@ public class PostMan extends Agent {
         instance = this;
         goingToPostOffice = false;
         this.personalGain=personalGain;
+        nrOrder = 0;
+        try {
+            id = Database.getInstance().getPostManId(name);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -196,6 +206,22 @@ public class PostMan extends Agent {
 
     public Destiny getDestiny() {
         return destiny;
+    }
+
+    public int getNrOrder() {
+        return nrOrder;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Point getPostOfficePosition() {
+        return postOfficePosition;
+    }
+
+    public void setNrOrder(int nrOrder) {
+        this.nrOrder = nrOrder;
     }
 
     public void setDestiny(Destiny destiny) {

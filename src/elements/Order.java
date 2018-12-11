@@ -20,7 +20,7 @@ public class Order {
 	public Order(Point destiny,int timeToDelivery) {
 		this.destiny = destiny;
 		this.timeToDelivery = timeToDelivery;
-		this.type = 1;
+		this.type = 0;
 	}
 
     /**

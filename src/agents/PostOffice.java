@@ -1,12 +1,15 @@
 package agents;
 
 import communication.handlers.postOffice.Handler;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
 import communication.messages.AliveMessage;
 import communication.messages.OrderMessage;
 import communication.messages.ProposalResponse;
+import database.Database;
 import elements.Order;
 import elements.Point;
 import elements.PostManID;
@@ -15,6 +18,8 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
+
+import javax.xml.crypto.Data;
 
 public class PostOffice extends Agent {
 
@@ -102,8 +107,15 @@ public class PostOffice extends Agent {
                     send(message);
                     pendingOrder = new Order(new Point(x, y),i*12);
                     pendingOrder.setTimeCreation(System.currentTimeMillis());
-                }
 
+                    
+                    try {
+                        Database.getInstance().insertPostOfficeData(postMen.size(), getNumberActiveOrders() );
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
             }
 
         }
@@ -135,10 +147,10 @@ public class PostOffice extends Agent {
                     }
                 }
 
-                reply = new ProposalResponse(receivers).toACL();
+                reply = new ProposalResponse(receivers, orderId).toACL();
 
                 if(reply != null){
-                    send(new ProposalResponse(receivers).toACL());
+                    send(reply);
                     System.out.println("[POSTOFFICE] " + reply.getPerformative() + " - " + reply.getOntology() + " | Others");
 
                 }
@@ -222,7 +234,20 @@ public class PostOffice extends Agent {
     	return null;
     }
 
+    public int getNumberActiveOrders(){
 
+        int count = 0;
+
+        for (Order order : orders){
+
+            if(order.getType() != 2)
+                count++;
+
+        }
+
+        return ++count;
+
+    }
 
 
 

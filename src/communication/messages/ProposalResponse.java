@@ -18,10 +18,10 @@ public class ProposalResponse extends Message{
         this.orderId = orderID;
     }
 
-    public ProposalResponse(ArrayList<AID> receivers) {
+    public ProposalResponse(ArrayList<AID> receivers, int orderID) {
         this.performative = ACLMessage.REJECT_PROPOSAL;
         this.receivers = receivers;
-        orderId = -1;
+        this.orderId = orderID;
     }
 
     public ProposalResponse(ACLMessage message) {

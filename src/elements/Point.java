@@ -56,4 +56,11 @@ public class Point {
         return "x:" + x + "  y:" + y;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+
+        Point other = (Point) obj;
+
+        return (x == other.getX()) && (y == other.getY()) ;
+    }
 }

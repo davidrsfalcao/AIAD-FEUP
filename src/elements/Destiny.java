@@ -9,7 +9,7 @@ public class Destiny {
 
 
     public Destiny(Point position, Point positionActual, double time) {
-        this.position = position;
+        this.position = new Point(position.getX(), position.getY());
         this.time = time;
         this.totalTime = time;
         deltaX = position.getX() - positionActual.getX();

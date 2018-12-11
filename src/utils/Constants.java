@@ -1,5 +1,7 @@
 package utils;
 
+import java.io.File;
+
 /**
  * Interface with all constants
  */
@@ -12,5 +14,7 @@ public interface Constants {
 
     int vehicleVelocity = 60; //km/h
     double ratioTime = 3600/10; // 1h --- 10s
+
+    String db_path = "src" + File.separator + "database" + File.separator + "database.db";
 
 }

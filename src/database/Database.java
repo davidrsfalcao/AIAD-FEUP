@@ -1,9 +1,11 @@
 package database;
 
 
-import java.io.File;
+import agents.PostMan;
+
 import java.sql.*;
-import java.util.ArrayList;
+
+import static utils.Constants.db_path;
 
 public class Database {
 
@@ -22,7 +24,7 @@ public class Database {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        String db_url = "jdbc:sqlite:database.db" ;
+        String db_url = "jdbc:sqlite:" + db_path ;
 
         try {
             conn = DriverManager.getConnection(db_url);
@@ -34,6 +36,70 @@ public class Database {
     public static Database getInstance() {
         return instance;
     }
+
+    public void insertPostOfficeData(int nrPostMen, int nrOrders) throws SQLException {
+
+        Statement stat = conn.createStatement();
+        String query = "INSERT INTO PostOfficeData (nrPostMen, nrOrders) VALUES (" + nrPostMen + "," + nrOrders+ ")";
+        stat.executeUpdate(query);
+
+
+    }
+
+    public void insertPostManData(PostMan postMan, double price) throws SQLException {
+
+        Statement stat = conn.createStatement();
+        String query = "SELECT nrPostMen, nrOrders FROM PostOfficeData ORDER BY idPostOfficeData DESC LIMIT 1;";
+        ResultSet rs = stat.executeQuery(query);
+
+        int nrPostMen = Integer.parseInt(rs.getString("nrPostMen"));
+        int nrOrders = Integer.parseInt(rs.getString("nrOrders"));
+
+
+        Statement stat1 = conn.createStatement();
+        String values = nrOrders + "," + nrPostMen + "," + postMan.getNrOrder() + "," + postMan.getId() + ",";
+        values += postMan.getVehicle().getMaximumLoad() +","+ postMan.getVehicle().getCurrentLoad() + "," + postMan.getPersonalGain() + ",";
+
+        double distance = postMan.getPosition().getDistance(postMan.getPostOfficePosition()) +
+                postMan.getPendingOrder().getPosition().getDistance(postMan.getPostOfficePosition());
+
+        values += distance + ","+ postMan.getPendingOrder().getEstimatedTime()+","+price;
+
+        String query1 = "INSERT INTO Data(nrOrders,nrPostMen,idOrder,idPostMan,maxLOad,currentLoad,personalGain,distance,estimatedTime,proposal) VALUES (" + values+ ");";
+        stat1.executeUpdate(query1);
+
+        rs.close();
+
+    }
+
+    public void updatePostOfficeData(int idOrder, int idPostman, int decision) throws SQLException {
+
+        Statement stat = conn.createStatement();
+        String query = "UPDATE Data SET decision = "+ decision +" WHERE idPostMan = "+ idPostman +" AND idOrder = " + idOrder + ";";
+        stat.executeUpdate(query);
+
+
+    }
+
+    public int getPostManId(String name1) throws SQLException{
+
+        Statement stat = conn.createStatement();
+        String query = "INSERT INTO PostMan(name) VALUES (\""+ name1+"\");";
+        stat.executeUpdate(query);
+
+        String query1 = "SELECT DISTINCT max(idPostMan) as maxId FROM PostMan;";
+        ResultSet rs = stat.executeQuery(query1);
+        String maxId = rs.getString("maxId");
+        rs.close();
+
+        System.out.println("maxID: " + maxId + ":");
+
+        if(maxId == null){
+            return 0;
+        }
+        else return Integer.parseInt(maxId);
+    }
+
 
     /*
 

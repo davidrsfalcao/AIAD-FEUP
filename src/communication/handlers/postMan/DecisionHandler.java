@@ -2,16 +2,25 @@ package communication.handlers.postMan;
 
 import agents.PostMan;
 import communication.messages.ProposalResponse;
-import elements.Destiny;
+import database.Database;
 import elements.Order;
 import jade.lang.acl.ACLMessage;
+
+import java.sql.SQLException;
 
 public class DecisionHandler {
 
     static ACLMessage parse(ACLMessage message, PostMan postMan) {
 
+        ProposalResponse res = new ProposalResponse(message);
+
         if(message.getPerformative() == ACLMessage.REJECT_PROPOSAL){
             postMan.setPendingOrder(null);
+            try {
+                Database.getInstance().updatePostOfficeData(res.getOrderId(),postMan.getId(), 0);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         else{
             ProposalResponse response = new ProposalResponse(message);
@@ -28,6 +37,13 @@ public class DecisionHandler {
             if(postMan.getDestiny() == null){
                 postMan.addDestinyPostOffice();
             }
+
+            try {
+                Database.getInstance().updatePostOfficeData(res.getOrderId(),postMan.getId(), 1);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
 
         }
 

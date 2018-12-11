@@ -2,6 +2,7 @@ package launcher;
 
 import agents.PostMan;
 import agents.PostOffice;
+import database.Database;
 import elements.Point;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
