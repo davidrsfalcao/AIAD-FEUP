@@ -89,6 +89,30 @@ class MailCompany {
 
         PostMan postMan2 = new PostMan("Veronica", new Point(-1,-2), postOffice.getAID(),4,1.5);
         agentsContainer.acceptNewAgent("PostMan Veronica", postMan2).start();
+        
+        PostMan postMan3 = new PostMan("Rafael", new Point(-3,0), postOffice.getAID(),7,1.1);
+        agentsContainer.acceptNewAgent("PostMan Rafael", postMan3).start();
+        
+        PostMan postMan4 = new PostMan("Manuel", new Point(-3,3), postOffice.getAID(),7,2);
+        agentsContainer.acceptNewAgent("PostMan Manuel", postMan4).start();
+        
+        PostMan postMan5 = new PostMan("Sofia", new Point(-1,2.2), postOffice.getAID(),7,1.9);
+        agentsContainer.acceptNewAgent("PostMan Sofia", postMan5).start();
+        
+        PostMan postMan6 = new PostMan("Joao", new Point(1,3), postOffice.getAID(),7,1.8);
+        agentsContainer.acceptNewAgent("PostMan Joao", postMan6).start();
+        
+        PostMan postMan7 = new PostMan("Ricardo", new Point(-2,-1), postOffice.getAID(),7,1.7);
+        agentsContainer.acceptNewAgent("PostMan Ricardo", postMan7).start();
+        
+        PostMan postMan8 = new PostMan("Lucas", new Point(-1.25,2.3), postOffice.getAID(),7,1.6);
+        agentsContainer.acceptNewAgent("PostMan Lucas", postMan8).start();
+        
+        PostMan postMan9 = new PostMan("Carolina", new Point(-0.8,1.6), postOffice.getAID(),7,2.2);
+        agentsContainer.acceptNewAgent("PostMan Carolina", postMan9).start();
+        
+        PostMan postMan10 = new PostMan("Josefa", new Point(-1.9,2.4), postOffice.getAID(),7,2.4);
+        agentsContainer.acceptNewAgent("PostMan Josefa", postMan10).start();
 
     }
     

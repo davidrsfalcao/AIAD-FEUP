@@ -5,15 +5,16 @@ import communication.handlers.postMan.ProposalHandler;
 import elements.Order;
 import elements.Point;
 import jade.lang.acl.ACLMessage;
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 import utils.Utils;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestAlgorithm {
-
+	
+	/*
     @Test
     public void testSortOrders(){
 
@@ -93,4 +94,5 @@ public class TestAlgorithm {
         assertEquals(o3, postMan.getOrders().get(5));
 
     }
+    */
 }
