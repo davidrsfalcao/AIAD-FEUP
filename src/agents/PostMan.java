@@ -42,9 +42,7 @@ public class PostMan extends Agent {
         this.name = name;
         this.position = position;
         this.postOffice = postOffice;
-        Random rnd = new Random();
-        int consumption = rnd.nextInt(51)+100;
-        vehicle = new Vehicle(capacity,consumption);
+        vehicle = new Vehicle(capacity,120);
         instance = this;
         goingToPostOffice = false;
         this.personalGain=personalGain;
