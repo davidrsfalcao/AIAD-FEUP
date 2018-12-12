@@ -58,14 +58,14 @@ public class Database {
 
         Statement stat1 = conn.createStatement();
         String values = nrOrders + "," + nrPostMen + "," + postMan.getNrOrder() + "," + postMan.getId() + ",";
-        values += postMan.getVehicle().getMaximumLoad() +","+ postMan.getVehicle().getCurrentLoad() + "," + postMan.getPersonalGain() + ",";
+        values += postMan.getVehicle().getMaximumLoad() +","+ postMan.getVehicle().getCurrentLoad()+ ","+ postMan.getOrders().size() + "," + postMan.getPersonalGain() + ",";
 
         double distance = postMan.getPosition().getDistance(postMan.getPostOfficePosition()) +
                 postMan.getPendingOrder().getPosition().getDistance(postMan.getPostOfficePosition());
 
-        values += distance + ","+ postMan.getPendingOrder().getEstimatedTime()+","+price;
+        values += distance +","+ postMan.isGoingToPostOffice() +","+ postMan.getPendingOrder().getEstimatedTime()+","+price;
 
-        String query1 = "INSERT INTO Data(nrOrders,nrPostMen,idOrder,idPostMan,maxLOad,currentLoad,personalGain,distance,estimatedTime,proposal) VALUES (" + values+ ");";
+        String query1 = "INSERT INTO Data(nrOrders,nrPostMen,idOrder,idPostMan,maxLOad,currentLoad,activeOrders,personalGain,distance,goingToPostOffice,estimatedTime,proposal) VALUES (" + values+ ");";
         stat1.executeUpdate(query1);
 
         rs.close();

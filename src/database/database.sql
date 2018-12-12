@@ -21,8 +21,10 @@ Create Table Data(
     idPostMan INTEGER NOT NULL,
     maxLOad INTEGER NOT NULL,
     currentLoad INTEGER NOT NULL,
+    activeOrders INTEGER NOT NULL,
     personalGain REAL NOT NULL,
     distance REAL NOT NULL,
+    goingToPostOffice INTEGER NOT NULL,
     estimatedTime INTEGER NOT NULL,
     proposal REAL NOT NULL,
     decision INTEGER

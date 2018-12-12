@@ -71,8 +71,17 @@ public class PostMan extends Agent {
         if(destiny != null){
             destiny.update(delta);
 
-            if(destiny.getPosition().equals(postOfficePosition))
-                goingToPostOffice = true;
+            if(destiny.getPosition().equals(postOfficePosition)){
+
+                if(orders.size() <= vehicle.getMaximumLoad()){
+                    goingToPostOffice = true;
+                }
+                else {
+                    goingToPostOffice = false;
+                }
+
+
+            }
 
 
             if(destiny.getTime() < 0){
@@ -204,7 +213,20 @@ public class PostMan extends Agent {
 
     public void addDestinyPostOffice(){
         destiny = new Destiny(postOfficePosition, new Point(position.getX(), position.getY()) ,vehicle.getTravelTime(postOfficePosition,position));
+
+        if(orders.size() <= vehicle.getMaximumLoad()){
+            goingToPostOffice = true;
+        }
+        else {
+            goingToPostOffice = false;
+        }
         goingToPostOffice = true;
+    }
+
+    public int isGoingToPostOffice(){
+        if (goingToPostOffice)
+            return 1;
+        else return 0;
     }
 
     public Destiny getDestiny() {
