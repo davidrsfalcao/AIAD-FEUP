@@ -1,12 +1,13 @@
 package tests;
 
 import elements.Point;
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestElements {
-
+	
+	/*
     @Test
     public void testPosition(){
 
@@ -18,6 +19,6 @@ public class TestElements {
         assertEquals(Math.sqrt(8), p2.getDistance(p3));
 
     }
-
+	*/
 
 }
