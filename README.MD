@@ -43,13 +43,14 @@ Postman                   	|       |  PostOffice
 Guarda Posição do PostOffice | < | [Confirm] *Handshake* |
 Espera uma order |   | Gera uma order |
 Calcula a sua oferta |  < | [Propagate] *Order* |
-[Propose] Proposal | > | Guarda o proposta |
+[Propose] *Proposal* | > | Guarda o proposta |
 Aguarda resposta |   | Calcula a melhor proposta |
 Analisa resposta | < | [ACCEPT\_PROPOSAL] *Decision* <br> ou <br> [REJECT\_PROPOSAL] * Decision* |
-...|   |  ...
-A cada segundo | < | [QUERY_IF] *Alive* |
-[Confirm] *Alive* | > | Verifica a atividade dos postmen 
-
+...|   |  ... |
+Atualiza o seu estado| < | [QUERY_IF] *Alive* |
+[Confirm] *Alive* | > | Verifica a atividade dos postmen |
+...|   | ... |
+[INFORM] *DeliveryDone* | > | Marca a *order* como entregue |
 
 
 ### Mensagens
